@@ -1,0 +1,41 @@
+
+  .Loading-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  .Loading-desc{
+    color: var(--gold);
+    font-size: 2rem;
+    font-family: 'Font-Title';
+    
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .Loading-logo {
+      animation: Loading-logo-spin infinite 3s linear;
+    }
+  }
+  
+  .Loading-header {
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .Loading-link {
+    color: #61dafb;
+  }
+  
+  @keyframes Loading-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

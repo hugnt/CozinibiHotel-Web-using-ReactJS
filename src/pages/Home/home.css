@@ -1,0 +1,387 @@
+
+/*#region section1-welcome */
+
+.home-intro .container
+{
+    margin: auto;
+    justify-content: space-between;
+}
+/* para  */
+
+/* picture  */
+
+.home-intro .intro-type_room
+{
+    justify-content: space-between;
+    margin-left: 3rem;
+}
+
+
+/*#endregion*/
+
+/*#region tour-travel */
+.tour_travel
+{
+    position: relative;
+    background: url('../../assets/images/home/home-section2-bg-org.png') center;
+    background-size: cover;
+    z-index:0;
+    /* fi
+    lter: brightness(0.2); */
+}
+.tour_travel::after
+{
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6) ;
+    background-size: cover;
+    left: 0;right: 0;top: 0;bottom: 0;
+}
+
+.tour_travel .container
+{
+    position: relative;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.tour_travel .row
+{
+    /* padding: 6rem 0; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.tour_travel .cp-item{
+    margin-bottom: 3rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: .5rem;
+}
+.tour_travel .cp-item img:hover{
+    transform: scale(1.1);
+}
+/*#endregion*/
+/*#region services  */
+
+.services .container
+{
+    margin: auto;
+    justify-content: space-between;
+    
+}
+.restaurant .slide-foods-move{
+    position: absolute;
+    bottom: 1rem;right: 1rem;
+    z-index: 4;
+}
+
+.restaurant .slide-foods-move span path{
+    color: var(--gold)!important;
+}
+.restaurant .slide-foods-move span .icon-fa
+{
+    height: 2rem!important;
+    padding-left: 4rem!important;
+}
+
+/* //.service */
+.services .service
+{
+    margin-left: 3rem;
+}
+
+.sv-content 
+{
+   display: flex;
+   flex-wrap:wrap ;
+   justify-content: space-between;
+}
+.sv-item{
+    /* margin: 2rem 0; */
+    padding: 2.5rem 0;
+}
+.sv-wrapper-item{
+    /* margin-right: .5rem; */
+    margin-bottom: 1.5rem;
+}
+.sv-content .sv-item:hover
+{
+    background-color: var(--gold);
+}
+.sv-item span:hover{
+    color: black!important;
+}
+
+.sv-item .item-image img {
+    width: 5.5rem;
+    margin: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+/*#endregion*/
+/*#region highlights */
+.hight_light
+{
+    background:url(../../assets/images/home/home-section4-bg.jpg);
+    background-repeat:no-repeat ;
+    background-size: cover;
+    position: relative;
+    z-index:0;
+}
+.hight_light::before
+{
+    content: '';
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;right: 0;bottom: 0;top: 0;
+    position: absolute;
+    
+}
+
+.hight_light .container
+{
+    margin: auto;
+    position: relative;
+
+}
+
+.hight_light .content
+{
+
+    justify-content: space-between;
+}
+
+.hight_light .border-circle{
+    margin-bottom: 2rem;
+}
+.hight_light .border-circle:hover{
+    transform: rotate(100deg);
+}
+.hight_light .border-circle:hover .item-image{
+    transform: rotate(-100deg);
+    
+}
+.hight_light .border-circle:hover img{
+    transform: scale(1.3);
+    
+}
+.hight_light .border-circle .item-image{
+    border-radius: 50%;
+}
+.hight_light .border-circle .item-image img{
+    transform: scale(1.5);
+}
+/*#endregion*/
+
+/*#region commands */
+
+.commands .container
+{
+    margin:auto ;
+    /* padding: 6rem 0; */
+}
+
+.commands .comment-slider
+{
+    width: 100%;
+}
+.commands .swiper-slide{
+    justify-content: space-between;
+}
+
+/*#endregion*/
+.commands .swiper-button-prev,
+.commands .swiper-button-next{
+    position: relative;
+    margin: 0;width: 0;height: 1,5rem;
+    color: var(--gold);
+    left: 0;
+    right: 0;
+    margin-top: 4rem;
+    font-weight: bolder;
+}
+.commands .swiper-button-prev::after,
+.commands .swiper-button-next::after{
+    border: 4px solid var(--gold);
+    border-radius: 50% ;
+    padding: .4rem 1.2rem;
+}
+.commands .swiper-button-prev{
+    margin-right: auto;
+    margin-left: 45%;
+    float: left;
+    margin-bottom: 3rem;
+    
+}
+.commands .swiper-button-next{
+    margin-left: auto;
+    margin-right: 45%;
+}
+
+
+/*#region media queries  */
+@media (max-width:1370px){
+
+  .home-intro .container
+  {
+    display: block;
+  }
+  .intro-para
+  {
+    width: 100%;
+    text-align: center;
+    padding-right: 0!important;
+    margin: 0;
+  }
+  .intro-para
+  {
+    width: 100%!important;
+  }
+  .intro-type_room
+  {
+    width: 100%!important;
+    margin: 0!important;
+    margin-top: 4rem!important;
+  }
+
+
+    .services .container
+    {
+        margin: auto;
+        justify-content: space-between;
+        display: block;
+        
+    }
+    .services .head-title 
+    {
+        text-align: center;
+    }
+    .services .restaurant
+    {
+        width: 100%;
+        margin-bottom: 4rem;
+    }
+    .services .service
+    {
+        width: 100%;
+        margin: 0!important;
+    }
+    .services .sv-content 
+    {
+    /* display: flex; */
+    /* margin: 0; */
+    flex-wrap:wrap ;
+    justify-content: space-between;
+    }
+    .sv-content .sv-wrapper-item
+    {
+        width: 20%;
+    }
+
+    .tour_travel .cp-item
+    {
+        width: 45%;
+    }
+
+    .hight_light
+    {
+
+    }
+    .hight_light .content
+    {
+        display: block;
+    }
+    .hight_light .item
+    {
+        width: 35%;
+        margin: 8rem auto;
+        /* padding: 0!important; */
+    }
+
+    .commands .content
+    {
+        padding: 1.5rem;
+    }
+
+
+
+
+}
+@media (max-width:991px){
+    
+    .services .service
+    {
+        width: 100%;
+        margin: 0!important;
+    }
+    .sv-content .sv-wrapper-item
+    {
+        width: 45%;
+    }
+    .hight_light .item
+    {
+        width: 40%;
+        margin: auto;
+        /* padding: 0!important; */
+    }
+    .commands .swiper-button-prev{
+        margin-left: 30%;
+    }
+    .commands .swiper-button-next{
+        margin-right: 30%;
+    }
+  
+
+}
+@media (max-width:800px){
+    .hight_light .item
+    {
+        width: 80%;
+        margin: auto;
+    }
+
+    .commands .swiper-slide
+    {
+        display: block;
+    }
+    .commands .cmt-item
+    {
+        width: 100%;
+        margin-bottom: 5rem;
+    }
+    .intro-type_room
+    {
+        flex-wrap: wrap;
+    }
+    .intro-type_room .room
+    {
+        width: 80%;
+        margin: 2rem auto;
+    }
+    .commands .swiper-button-prev{
+        display: none;
+    }
+    .commands .swiper-button-next{
+        display: none;
+    }
+
+}
+
+@media (max-width:520px){
+
+    .tour_travel .cp-item
+    {
+        width: 100%;
+    }
+    .intro-type_room .room
+    {
+        width: 100%;
+        /* margin: 2rem auto; */
+    }
+    .sv-content .sv-wrapper-item
+    {
+        width: 100%;
+    }
+}
+/* #endregion */

@@ -1,0 +1,134 @@
+.tool-box {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.tool-box .box-item {
+    width: 3.4rem;
+    height: 3.4rem;
+    margin-top: 1rem;
+    transition: all ease-out 1s;
+
+}
+
+.tool-box .box-item:nth-child(2) {
+    width: 3.8rem;
+    height: 3.8rem;
+}
+
+.tool-box .backToTop-btn {
+    animation: displayIcon 300ms linear;
+}
+
+.tool-box .box-item img {}
+
+.tool-box .box-item:hover img {
+    transform: scale(1.2);
+}
+
+@keyframes displayIcon {
+    0% {
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+
+    100% {
+        opacity: 1;
+        height: 3.8rem;
+        width: 3.8rem;
+    }
+}
+
+
+.circle-wrap {
+    /* margin: 150px auto; */
+    /* margin-right: 30rem; */
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    position: relative;
+
+}
+.inside-circle{
+    width: 3.4rem;
+    height: 3.4rem;
+}
+.menu-foods-box .circle:hover .inside-circle img{
+    transform: scale(1.2);
+}
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+    width: 4rem;
+    height: 4rem;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+    clip: rect(0px, 4rem, 4rem, 2rem);
+}
+
+.circle-wrap .inside-circle {
+    width: 3.4rem;
+    height: 3.4rem;
+    top: 52%;
+    left: 52%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    z-index: 100;
+}
+
+/* color animation */
+
+/* 3rd progress bar */
+.mask .fill {
+    clip: rect(0px, 2rem, 4rem, 0px);
+    background-color: #37a05f79;
+}
+/* .circle-wrap:hover .mask.full{
+    animation: fill ease-in-out 3s;
+    transform: rotate(180deg);
+}
+.circle-wrap:hover .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(180deg);
+} */
+@keyframes fill {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+.loading .mask.full{
+    animation: fill ease-in-out 3s;
+    transform: rotate(180deg);
+}
+.loading .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(180deg);
+}
+.loading .inside-circle img{
+    transform: scale(1.2);
+}
+
+
+
+.menu-foods-box .menu-cart-wrapper{
+    position: absolute;
+    right: 5rem;
+    bottom: -9rem;
+    /* width: 10rem; */
+    width: 30rem;
+}

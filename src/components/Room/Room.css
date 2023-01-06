@@ -1,0 +1,50 @@
+.room
+{
+    position: relative;
+}
+.room::after
+{
+    content: '';
+    position: absolute;
+    background: url(../../assets/images/home/home-section1-border.png);
+    left: 0;right: 0;bottom: 0;top: 0;
+    background-size: 100% 100%;
+
+}
+
+.room 
+{
+   overflow: hidden;
+}
+.room:hover img 
+{
+    transform: scale(1.1);
+}
+.room img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+    transition: all .35s;
+   
+}
+.room .desc 
+{
+    background: url(../../assets/images/home/home-section1-item-top.png);
+    background-size: 100% 100%;
+    position: absolute;
+    text-align: center;
+    bottom: 0;left: 0;right: 0;
+    padding: 1rem 0;
+
+}
+.room .desc span
+{
+    /* position: absolute; */
+    font-family: 'Font-Title';
+    color: var(--gold);
+    font-size: 2rem;
+    text-transform: uppercase;
+    
+}
+

@@ -1,0 +1,67 @@
+.section-bg .container
+{
+    margin: auto;
+    padding:5rem 0 ;
+}
+.bg-white
+{
+    background: url("../../assets/images/section-bg.png") center;
+    background-repeat:no-repeat ;
+    background-size: cover;
+    /* padding:5.5rem 0 ; */
+    position: relative;
+    z-index: 3;
+}
+.bg-white .container{
+    /* padding:6rem 0 ; */
+}
+.bg-white::before
+{
+    content: '';
+    background: url("../../assets/images/bg-top-white.png") top;
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;bottom: 99%;
+    height: 3rem;
+
+    position: absolute;
+}
+.bg-white::after
+{
+    content: '';
+    background: url("../../assets/images/bg-bottom-white.png") bottom;
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;top: 99%;
+    height: 3rem;
+    
+    position: absolute;
+}
+
+.bg-gold 
+{
+    background:var(--gold);
+    position: relative;
+    z-index: 3;
+    
+}
+.bg-gold::before
+{
+    content: '';
+    position:absolute;
+    background: url(../../assets/images/home/home-section1-bg-top.png) top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: 99%;left: 0;right: 0;
+    height: 4.3rem;
+}
+.bg-gold::after
+{
+    content: '';
+    position:absolute;
+    background: url(../../assets/images/bg-bottom-gold.png) bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top:99%;left: 0;right: 0;
+    height: 4.3rem;
+}

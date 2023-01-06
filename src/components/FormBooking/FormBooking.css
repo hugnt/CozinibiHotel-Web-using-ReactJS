@@ -1,0 +1,49 @@
+.form-booking{
+    background-color: var(--gold);
+    /* padding: 2rem 1rem; */
+    overflow: hidden;
+
+}
+.w-33{
+    width: calc(100%/3);
+}
+.w-66{
+    width: 66.666666%;
+}
+.form-booking .inputBox{
+    padding: .5rem;
+   
+
+}
+.inputBox input, 
+.inputBox select,
+.inputBox textarea{
+    padding: .5rem 1rem;
+    height: 3rem;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.6);
+
+}
+.inputBox textarea{
+    height: 6rem;
+}
+#btn-send{
+    padding: .5rem 1rem;
+    margin: .5rem auto;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color:var(--gold);
+    font-weight: bolder;
+    text-transform: uppercase;
+    text-align: center;
+}
+#btn-send:hover{
+    background-color: rgba(0, 0, 0, 0.76);
+    letter-spacing: .5rem;
+}
+
+@media (max-width:900px) {
+    .form-booking #btn-send{
+        width: 50%;
+    }
+}

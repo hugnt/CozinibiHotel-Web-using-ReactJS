@@ -1,0 +1,96 @@
+.about-hotel-pics{
+    position: relative;
+    background: url(../../assets/images/gallery/ht-11.jpg) center;
+    background-size: cover;
+    z-index: 0;
+    
+}
+.st-gallery .container{
+    padding: 2rem;
+}
+.list-pics .container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.list-pics::after{
+    content: '';
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.692);
+    background-size: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.about-travel-pics{
+    position: relative;
+    background: url(../../assets/images/gallery/travel-7.jpg) center;
+    background-size: cover;
+    z-index: 0;
+}
+
+.pic-item{
+    height: 25rem;
+    margin-bottom: 3rem;
+}
+
+.pics-slide.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.pics-slide.swiper-slide {
+    background-position: center;
+    background-size: cover;
+}
+
+.pics-slide .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+}
+.pics-slide .swiper-slide img:hover{
+    transform: scale(1.1);
+    filter: brightness(50%);
+
+}
+.pics-slide .swiper-slide:hover::after{
+    content: '+';
+    position: absolute;
+    font-size: 5rem;
+    color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.about-travel-pics{
+    position: relative;
+    z-index: 1;
+}
+.about-travel-pics::before
+{
+    content: '';
+    background: url(../../assets/images/bg-top-white.png);
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;bottom: 0;
+    height: 3rem;
+    position: absolute;
+}
+
+.about-travel-pics .last-border{
+    position:absolute;
+    background: url(../../assets/images/bg-bottom-white.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: -3rem;left: 0;right: 0;
+    height: 4rem;
+}

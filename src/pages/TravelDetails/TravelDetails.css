@@ -1,0 +1,101 @@
+.tv-title .container{
+    /* padding: 0; */
+}
+.tv-section-images{
+    width: 100%;
+    display: flex;
+}
+.tv-section-images .tv-img-box{
+    width: calc(100%/3);
+}
+.travel-desc-col{
+   
+}
+.travel-desc{
+    justify-content: space-between;
+}
+.travel-desc-col li{
+   margin-bottom: 1rem;
+}
+
+.travel-desc-col li span{
+   font-size: 1.1rem;
+}
+.travel-desc-col li .icon{
+    margin-right: .5rem;
+    height: 1.2rem;
+ }
+ .travel-desc-col li .icon path{
+    color: var(--gold);
+ }
+
+
+
+
+
+/* list img  */
+.content-other{
+    margin-top: 3rem;
+}
+.content-other .title {
+    align-items: center;
+    justify-content: space-between;
+
+}
+.content-other .title .line-title{
+    display: block;
+    object-fit: contain;
+    width: 35%;
+    margin-bottom: 3rem;
+
+}
+
+ .travel-list-img{
+    flex-wrap: wrap;
+    justify-content: space-between;
+ }
+ .travel-list-img .otherTour-item{
+    width: 23%;
+    position: relative;
+    margin-bottom: 1.2rem;
+ }
+ .travel-list-img .otherTour-item:hover::after{
+    content: '';
+    position: absolute;
+    left: 0;right: 0;bottom: 0;top: 0;
+    background-color: rgba(0, 0, 0, 0.507);
+    transition: all 0.5s ease;
+ }
+ .travel-list-img .otherTour-item .item-title{
+    display: none;
+ }
+ .travel-list-img .otherTour-item:hover .item-title{
+    display: block;
+ }
+
+   
+ @media (max-width:1314px) {
+   .content-other .title .line-title{
+      width: 30%!important;
+   }
+   .travel-list-img .otherTour-item{
+      width: 45%;
+      margin-right: 0;
+      margin-bottom: 4rem;
+   }
+   .travel-desc{
+      display: block!important;
+  }
+  .travel-desc-col{
+      margin-bottom:3rem ;
+  }
+ }
+
+ @media (max-width:900px) {
+   .content-other .title .line-title{
+      display: none;
+   }
+   .travel-list-img .otherTour-item{
+      width: 100%;
+   }
+ }

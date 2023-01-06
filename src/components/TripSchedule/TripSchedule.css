@@ -1,0 +1,30 @@
+.trip_schedule
+{
+    /* margin-top: 6rem; */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.trip_schedule table,th,td
+{
+    border: 1px solid black;
+}
+.trip_schedule table th
+{
+   width: 20%;
+   padding: 1rem 3rem;
+   font-family:'Font-Bold';
+   background-color: #f5f5f5;
+
+}
+.trip_schedule table td
+{
+   width: 80%;
+   padding:1rem  3rem;
+   padding-right: 10rem;
+   background-color: #fff;
+
+}

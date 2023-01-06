@@ -1,0 +1,95 @@
+.menu-cart{
+    background-color: #fff;
+    border: 1px solid var(--gold);
+    /* padding: 1rem; */
+    max-height: 35rem;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border-top-left-radius: 1.3rem;
+    border-bottom-left-radius: 1.3rem;
+    padding-bottom: 0;
+    padding-top: 1.5rem;
+}
+.menu-cart::-webkit-scrollbar{
+    /* display: none; */
+    width: 5px;
+}
+.ending-menu{
+    margin-top: 2rem;
+    /* border-top: 1px solid var(--gold); */
+    padding: .5rem 1rem;
+    bottom: -1px;
+    position: sticky;
+    background-color: var(--gold);
+}
+.ending-menu .payment{
+    display: flex;
+    justify-content: space-between;
+}
+.ending-menu .payment span{
+    font-size: 1.5rem;
+    /* font-weight: bolder; */
+    font-family: 'Font-Title';
+}
+.ending-menu .details{
+    background-color: #000;
+    text-align: center;
+    border-radius: 1.1rem;
+    margin: .5rem 0;
+    padding: .5rem 0;
+}
+.ending-menu .details .detail{
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: var(--gold);
+    
+}
+.ending-menu .details:hover .detail{
+    letter-spacing: .2rem;
+    color: aliceblue;
+}
+.ending-menu .note{
+    font-style: italic;
+    text-align: center;    
+}
+.menu-cart>.cancel{
+    position: absolute;
+    right:-0.5rem;
+    top: -0.5rem;
+    font-size: 1.5rem;
+    color: var(--gold);
+    font-weight: bolder;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: rgb(190, 36, 36);
+    padding: 0 .7rem;
+    padding-bottom: .3rem;
+    z-index: 3;
+}
+.menu-cart>.cancel:hover{
+    color: #fff;
+}
+
+/* //empty  */
+.menu-cart .menu-empty{
+    text-align: center;
+}
+.menu-cart .menu-empty .desc{
+    font-size: 1.2rem;
+    margin-bottom: .5rem;
+    font-weight: bolder;
+}
+.menu-cart .menu-empty .desc span path{
+    color: var(--gold);
+}
+.menu-cart .menu-empty .desc span svg{
+    margin-right: .5rem;
+    height: 1.2rem;
+}
+.menu-cart .menu-empty .desc:last-child{
+    color: var(--gold);
+}
+.menu-cart .menu-empty .desc:last-child:hover{
+    text-decoration: underline;
+    letter-spacing: .1rem;
+}

@@ -1,0 +1,170 @@
+
+
+/* #region section-02*/
+.comfortable-rooms 
+{
+    background: url("../../assets/images/gallery/ht-11.jpg") center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;right: 0;top: 0;bottom: 0;
+    height: 100%;
+    position: relative;
+
+}
+.comfortable-rooms .container,
+.various-services .container
+{
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;  
+}
+.au-article-wrapper
+{
+    padding:6rem 3rem;
+}
+.comfortable-rooms::after
+{
+    content: '';
+    background: url(../../assets/images/home/home-section1-bg-top.png);
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;bottom: 0;
+    height: 3rem;
+    z-index: 3;
+    position: absolute;
+}
+/* #endregion */
+
+/* #region section-03 */
+.extensive-menu
+{
+    background: url("../../assets/images/about_us/about_us-section03-bg.png") center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;right: 0;top: 0;bottom: 0;
+    position: relative;
+
+
+}
+.extensive-menu::before
+{
+    content: '';
+    position:absolute;
+    background: url(../../assets/images/bg-bottom-gold.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    top:-1rem;left: 0;right: 0;
+    height: 4rem;
+    z-index: 3;
+
+}
+.extensive-menu::after
+{
+    content: '';
+    background: url(../../assets/images/home/home-section1-bg-top.png);
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;bottom: 0;
+    height: 3rem;
+    position: absolute;
+    z-index: 3;
+
+}
+.extensive-menu .container
+{
+    display: flex;
+    padding: 0;
+    width: 100%;
+    justify-content: flex-start;
+    height: 100%;
+}
+/* #endregion */
+
+/* #region section-04 */
+.various-services
+{
+    background: url("../../assets/images/about_us/about_us-section04-bg.png") center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 0;right: 0;top: 0;bottom: 0;
+    position: relative;
+    
+}
+.various-services::before
+{
+    content: '';
+    position:absolute;
+    background: url(../../assets/images/bg-bottom-gold.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    top:-1rem;left: 0;right: 0;
+    height: 4rem;
+    z-index: 3;
+
+}
+.various-services::after
+{
+    content: '';
+    background: url(../../assets/images/home/home-section1-bg-top.png);
+    background-repeat:no-repeat ;
+    background-size: cover;
+    left: 0;right: 0;bottom: 0;
+    height: 3rem;
+    position: absolute;
+    z-index: 3;
+
+}
+
+.various-services .last-border{
+    position:absolute;
+    background: url(../../assets/images/bg-bottom-gold.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    bottom: -3rem;left: 0;right: 0;
+    height: 4rem;
+    z-index: 1;
+}
+/* #endregion */
+
+/*#region media queries  */
+
+@media (max-width:1610px){
+
+  
+
+}
+@media (max-width:1370px){
+
+  
+
+}
+@media (max-width:1248px){
+    .au-article-wrapper{
+        width: 50%!important;
+    }
+   
+
+}
+@media (max-width:991px){
+    .au-article-wrapper{
+        width:100%!important;
+    }
+  
+
+}
+
+
+@media (max-width:800px){
+
+
+
+}
+
+@media (max-width:520px){
+
+    
+
+}
+/* #endregion */

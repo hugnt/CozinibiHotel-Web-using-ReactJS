@@ -1,0 +1,48 @@
+
+.comment-box form fieldset
+{
+    border:1rem solid transparent;
+    border-image: url(../../assets/images/home/home-section5-border.png) 10% round;
+    padding: 3rem;
+
+}
+.comment-box form .para{
+    height: 10rem;
+}
+.comment-box form .para p
+{
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+            line-clamp: 3; 
+    -webkit-box-orient: vertical;
+}
+
+.comment-box form fieldset legend .icon-fa
+{
+    height: 4rem!important;
+    padding: 0 .5rem!important;
+}
+
+.comment-box form fieldset legend path
+{
+    color: var(--gold)!important;
+}
+.comment-box form fieldset .author 
+{
+    align-items: center;
+}
+
+.comment-box form fieldset .author .ava
+{
+    width: 5rem;
+    height: 5rem;
+    margin-right: 1rem;
+
+}
+.comment-box form fieldset .author .ava img
+{
+    border-radius: 50%;
+}

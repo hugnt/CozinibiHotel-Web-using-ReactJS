@@ -1,0 +1,103 @@
+.foods-list
+{
+    flex-wrap: wrap;
+    justify-content: space-between;
+} 
+.wrapper-food{
+    margin-bottom: 3rem;
+}
+
+
+.wrapper-food .item-image:hover img{
+    transform: scale(1.2);
+}
+.wrapper-food .price{
+    position: absolute;
+    right:1.4rem;
+    top: 1rem;
+    background: url(../../assets//images/layout-menu-select.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: .2rem .5rem;
+    border-radius: 1.1rem;
+    z-index: 4;
+    
+    
+}
+.wrapper-food .price span{
+
+    text-transform: capitalize;
+    font-family: Font-Title;
+    font-size: 1.2rem;
+    display: block;
+    margin: 1rem;
+
+    
+}
+.wrapper-food .options{
+    position: absolute;
+    right:1.4rem;
+    bottom: 1.5rem;
+
+
+}
+.wrapper-food .options path{
+    color: #fff;
+    height: 2rem;
+}
+.wrapper-food .options .icon{
+    height: 1.5rem;
+    margin-left: .8rem;
+    cursor: pointer;
+}
+.toggleHeart {
+    color:rgba(255, 0, 0, 0.973)!important;
+}
+.wrapper-food .options .icon:hover path{
+    color: var(--gold);
+   
+}
+.wrapper-food .options .cart-btn .number{
+    position: absolute;
+    color: #fff;
+    top: -0.7rem;right: -0.7rem;
+    background-color: rgba(255, 0, 0, 0.973);
+    border-radius: 50%;
+    padding: 0 .4rem;
+    z-index: 2;
+
+}
+
+
+/*#region media queries  */
+
+@media (max-width:1370px){
+
+  
+}
+ 
+@media (max-width:991px){
+
+   .wrapper-food
+   {
+    width: 45%!important;
+   }
+
+}
+
+
+@media (max-width:570px){
+
+
+    .wrapper-food
+   {
+    width: 100%!important;
+   }
+}
+
+@media (max-width:520px){
+
+
+
+}
+/* #endregion */

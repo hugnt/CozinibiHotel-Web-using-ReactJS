@@ -1,0 +1,181 @@
+.accommodation_2
+{
+
+}
+
+.accommodation_2 .slide-show .swiper-slide{
+    height: 40rem;
+}
+.accommodation_2 .slide-container{
+    position: absolute;
+    left: 0;right: 0;
+    bottom: 0;
+    padding:0 15rem; 
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+.accommodation_2 .slide-show img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.accommodation_2 .list-slides .swiper-slide{
+    height: 10rem;
+    width: 10rem;
+    padding: 2rem;
+    
+}
+.accommodation_2 .list-slides .swiper-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    
+}
+
+.box-pic .box-pic-main
+{
+
+}
+.box-pic .box-pic-main .pic-show img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.box-pic .box-pic-desc
+{
+   justify-content: space-evenly;
+   background-color: #fff;
+    padding: 2rem 0;
+}
+.box-pic .box-pic-desc .item-image
+{
+   width: 5rem;
+   height: 5rem;
+   margin-bottom: 1rem;
+}
+.box-pic .box-pic-desc .item-image img{
+    object-fit: contain;
+}
+
+
+/* box-desc */
+.box-desc
+{
+    margin: 6rem 0;
+}
+.box-equipments
+{
+
+}
+.box-equipments .title
+{
+    display: block;
+    text-transform: uppercase;
+    font-family:'Font-Bold' ;
+    font-size: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #cfcfcf;
+    margin-bottom: 1rem;
+}
+.box-equipments .list-equips{
+    margin-top: 4rem;
+    overflow: hidden;
+}
+.box-equipments .list-equips .equip-item
+{
+    min-width: 50%;
+    float: left;
+    line-height: 2rem;
+    align-items: center;
+    cursor: pointer;
+}
+.box-equipments .list-equips .equip-item .check-icon
+{
+    display: block;
+    margin-right: 1rem;
+}
+.check-icon path{
+    color: var(--gold);
+}
+
+/* content-relevant*/
+.content-relevent
+{
+    
+    padding-left: 3rem;
+    padding-top: 1.5rem;
+}
+.content-relevent .box
+{
+
+}
+
+
+/* other rooms */
+.other_rooms
+{
+    margin-top: 5rem;
+}
+.other_rooms .list-rooms
+{
+    margin-top: 3rem;
+}
+.other-room-item{
+    margin-bottom: 2rem;
+}
+
+
+/*#region media queries  */
+
+@media (max-width:1300px){
+
+    .accommodation_2 .content {
+        display: block;
+    }
+    .accommodation_2 .content-main,
+    .accommodation_2 .content-relevent
+    {
+        width: 100%;
+    }
+    .accommodation_2 .content-relevent{
+        margin-top: 6rem;
+    }
+}
+ 
+@media (max-width:770px){
+    .accommodation_2{
+        margin-top: 4rem;
+    }
+    .box-equipments .list-equips .equip-item
+    {
+        width: 100%;
+        float: none;
+    }
+}
+
+
+@media (max-width:1050px){
+    .accommodation_2 .slide-show .swiper-slide{
+        height: 40rem;
+    }
+    .accommodation_2 .slide-container{
+        padding: 0!important;
+    }
+    .accommodation_2 .list-slides .swiper-slide{
+        height: auto;
+        width: auto;
+        padding: 0;
+        
+    }
+   
+
+}
+
+@media (max-width:520px){
+
+
+
+}
+/* #endregion */

@@ -1,0 +1,26 @@
+.search-result-box{
+
+}
+.search-result-box .res-rooms,
+.search-result-box .res-tours{
+    display: flex;
+    /* justify-content: space-around; */
+    flex-wrap: wrap;
+}
+.search-result-box .search-item{
+    margin-bottom: 3rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem;
+    margin-right: 2rem;
+}
+
+@media (max-width:1070px) {
+    .search-result-box .search-item{
+        width: 40%;
+    }
+}
+@media (max-width:800px) {
+    .search-result-box .search-item{
+        width: 100%;
+    }
+}
