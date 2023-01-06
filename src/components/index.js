@@ -10,3 +10,4 @@ export { default as TripSchedule } from './TripSchedule';
 export { default as Loading } from './Loading';
 export { default as SearchBox } from './SearchBox';
 export { default as Cart } from './Cart';
+export { default as CartItem } from './CartItem';

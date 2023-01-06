@@ -60,7 +60,7 @@ function SearchBox(props) {
                     type="search"
                     name=""
                     id="search-input"
-                    placeholder="Rooms, Travels, Services and Restaurents"
+                    placeholder="Rooms, Travels, ..."
                     onChange={handleSearchTermChange}
                     onBlur={handleBlur}
                     onFocus={()=> setDisplayRes(true)}

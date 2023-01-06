@@ -9,9 +9,10 @@ import Gallery from '~/pages/Gallery';
 import Contact from '~/pages/Contact';
 import RoomDetails from '~/pages/RoomDetails';
 import TravelDetails from '~/pages/TravelDetails';
-import NotFoundPage from '~/pages/NotFoundPage';
+import Bill from '~/pages/Bill';
 import Booking from '~/pages/Booking';
 import SearchResults from '~/pages/SearchResults';
+import NotFoundPage from '~/pages/NotFoundPage';
 const publicRoutes = [
     {
         name: "home",
@@ -82,6 +83,11 @@ const publicRoutes = [
         name: "search-results",
         path: '/search-results',
         component: SearchResults,
+    },
+    {
+        name: "bill",
+        path: '/bill',
+        component: Bill,
     },
     {
         name: "not-found",

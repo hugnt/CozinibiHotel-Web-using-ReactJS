@@ -8,13 +8,13 @@ import { useEffect } from 'react';
 import Item from '../Item';
 
 //data 
-import { foods } from '~/utils';
+// import { foods } from '~/utils';
 
 //css
 import './CartItem.css'
 
 function CartItem(props) {
-    let {handleAddFoods, foodPicked,handleRemoveFoods,handleSubFoods, setTotal} = props;
+    let {handleAddFoods, foodPicked,handleRemoveFoods,handleSubFoods, setTotal, reRender} = props;
     
     useEffect(()=>{
         var total = 0;
@@ -22,9 +22,9 @@ function CartItem(props) {
             total+=item.number*item.food.price;
             return false;
         });
-        setTotal(total);
+        setTotal&&setTotal(total);
         // eslint-disable-next-line
-    },[foodPicked])
+    },[foodPicked,reRender])
 
     return (
         <div className='food-wrapper'>

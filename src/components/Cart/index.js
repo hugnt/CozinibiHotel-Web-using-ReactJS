@@ -34,7 +34,7 @@ function Cart(props) {
                     <span className='total-price'>${total}</span>
                 </div>
                 <div className='details row'>
-                    <Link to="" className='detail'>Order now!</Link>
+                    <Link onClick={()=>setShowCart(false)} to="/bill" className='detail'>Order now!</Link>
                 </div>
                 <div className='note'>
                     <p>

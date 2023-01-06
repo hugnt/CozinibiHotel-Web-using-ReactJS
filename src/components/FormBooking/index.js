@@ -9,20 +9,32 @@ import './FormBooking.css'
 
 function Input(props) {
     let { placeHolder, width, type, name, register } = props;
-    if (type !== "date") {
-        return (<div className={`inputBox ${width}`}>
-            <input {...register(name)} type={type} placeholder={placeHolder} className="w-100" />
-        </div>);
+    if (type === "date") {
+        return (
+            <div className={`inputBox ${width}`}>
+                <input {...register(name)}
+                    type={"text"} placeholder={placeHolder} className="w-100"
+                    onChange={(e) => console.log(e.target.value)}
+                    onFocus={(e) => (e.target.type = "date")}
+                    onBlur={(e) => (e.target.type = "text")} />
+            </div>
+        );
     }
-    return (
-        <div className={`inputBox ${width}`}>
-            <input {...register(name)}
-                type={"text"} placeholder={placeHolder} className="w-100"
-                onChange={(e) => console.log(e.target.value)}
-                onFocus={(e) => (e.target.type = "date")}
-                onBlur={(e) => (e.target.type = "text")} />
-        </div>
-    );
+    if (type === "time") {
+        return (
+            <div className={`inputBox ${width}`}>
+                <input {...register(name)}
+                    type={"text"} placeholder={placeHolder} className="w-100"
+                    onChange={(e) => console.log(e.target.value)}
+                    onFocus={(e) => (e.target.type = "time")}
+                    onBlur={(e) => (e.target.type = "text")} />
+            </div>
+        );
+    }
+    return (<div className={`inputBox ${width}`}>
+        <input {...register(name)} type={type} placeholder={placeHolder} className="w-100" />
+    </div>);
+
 }
 
 function Select(props) {
@@ -61,10 +73,13 @@ const initData = {
     childrens: "",
     checkout: "",
     email: "",
-    content: ""
+    content: "",
+    room_id:"",
+    eating_time: "",
+    eating_place:"",
 }
 function FormBooking(props) {
-    let { type1, type2 } = props;
+    let { type1, type2, type3 } = props;
     let { register, handleSubmit, reset } = useForm();//map all input by registing
     let [data, setData] = useState(initData);
     const submitData = (formData) => {
@@ -103,7 +118,7 @@ function FormBooking(props) {
                 <Border color="black">
                     <form className='form-booking' style={{ padding: "1rem" }} onSubmit={handleSubmit(submitData)}>
                         <div className='f-row d-flex'>
-                            <Input type="date" placeHolder="CHECKIN" width="w-50" register={register}  name="checkin" />
+                            <Input type="date" placeHolder="CHECKIN" width="w-50" register={register} name="checkin" />
                             <Input type="date" placeHolder="CHECKOUT" width="w-50" register={register} name="checkout" />
                         </div>
                         <div className='f-row d-flex'>
@@ -128,6 +143,28 @@ function FormBooking(props) {
                     </form>
                 </Border>
             }
+            {type3 && <form className='form-booking type3' onSubmit={handleSubmit(submitData)}>
+                <div className='f-row d-flex'>
+                    <Input placeHolder="Full name" width="w-50" register={register} name="name" />
+                    <Input placeHolder="Telephone" width="w-50" register={register} name="phone" type="tel" />
+                </div>
+                <div className='f-row d-flex'>
+                    <Input placeHolder="Room Id" width="w-50" register={register} name="room_id" />
+                    <Input type="time" placeHolder="Eating Time" width="w-50" register={register} name="eating_time" />
+                </div>
+                <div className='f-row d-flex'>
+                    <Select options={["Room","Pool", "Restaurant", "Beach", "Playground"]} width="w-100" register={register} placeHolder="Eating Place" name="eating_place" />
+                </div>
+                <div className='f-row d-flex'>
+                    <TextArea placeHolder="Some more notes" width="w-100" register={register} name="content" />
+                </div>
+                <div className='f-row d-flex'>
+                    <button type='submit' id="btn-send" className={"w-50"}>Comfirm</button>
+                </div>
+            </form>}
+
+
+
         </Fragment>
     );
 }

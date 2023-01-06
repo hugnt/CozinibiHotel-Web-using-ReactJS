@@ -41,6 +41,14 @@
     background-color: rgba(0, 0, 0, 0.76);
     letter-spacing: .5rem;
 }
+.type3{
+    background-color: transparent;
+}
+.type3 .inputBox input, 
+.type3 .inputBox select,
+.type3 .inputBox textarea{
+    border: 1px solid var(--gold);
+}
 
 @media (max-width:900px) {
     .form-booking #btn-send{

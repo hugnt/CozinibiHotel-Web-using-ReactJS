@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 import { handleAddFoods } from '~/utils';
 //hooks
-import { useState } from 'react';
+// import { useState } from 'react';
 
 //icon
 import { Icon } from '~/utils';
@@ -19,7 +19,7 @@ import { foods } from '~/utils';
 
 function Menu(props) {
     let { handleAddFoods, foodPicked } = props;
-    let [toggleHeart, setToggleHeart] = useState(false);
+    // let [toggleHeart, setToggleHeart] = useState(false);
 
     const handleToggleHeart = (e) => {
         console.log(e.target);

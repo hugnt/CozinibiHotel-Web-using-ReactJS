@@ -68,3 +68,16 @@
     font-weight: bolder;
     /* color:red; */
 }
+
+@media (max-width: 600px) {
+    .food-wrapper .food-item{
+        width: 100%;
+        border: none;
+        padding-bottom: .5rem;
+        border-bottom: 1px solid var(--gold);
+    }
+    .food-wrapper .food-info{
+        display: block;
+        border: 1px solid var(--gold);
+    }
+}

@@ -132,3 +132,8 @@
     /* width: 10rem; */
     width: 30rem;
 }
+@media (max-width: 600px) {
+    .menu-foods-box .menu-cart-wrapper{
+        width: 20rem;
+    }
+}

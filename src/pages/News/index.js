@@ -31,7 +31,7 @@ function News() {
                 return (
                     <Border key={i} color="gold" classname="d-flex new-wrapper">
                         <ArticlePart title={item.name} fontTitle="2rem" width="w-50" 
-                        classname="new-article" ending="Read more"/>
+                        classname="new-article" />
                         <div className='w-50 news-img'>
                             <img src={item.imgSrc} alt='img' className='w-100'/>
                         </div>

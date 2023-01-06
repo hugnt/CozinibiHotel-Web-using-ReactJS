@@ -1,0 +1,103 @@
+.form-order{
+    border-right: 3px solid var(--gold);
+    padding-right: 4rem;
+    margin-right: 4rem;
+}
+.form-order{
+    text-align: center;
+}
+.form-order .logo-img{
+    /* display: block; */
+    margin-bottom: 2rem;
+}
+.details-bill{
+
+}
+.details-bill .discount-code{
+    border-top: .5px solid var(--gold);
+    border-bottom: .5px solid var(--gold);
+    padding: 2rem 0;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+}
+.details-bill .discount-code .inp-code{
+    width: 80%;
+    border: 1px solid var(--gold);
+   
+}
+.details-bill .discount-code .inp-code input{
+    width: 100%;
+    padding: 1rem;
+}
+.details-bill .discount-code .btn-applyCode{
+    padding: 1rem;
+    width: 20%;
+    border: 1px solid var(--gold);
+}
+.details-bill .transaction {
+    padding: 2rem 0;
+    border-bottom: .5px solid var(--gold);
+    width: 90%;
+    margin: auto;
+}
+.details-bill .transaction .food-price,
+.details-bill .total .total-money
+{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.details-bill .transaction .food-price span,
+.details-bill .total .total-money span
+{
+    font-size: 1.2rem;
+}
+.details-bill .total{
+    padding: 2rem 0;
+    width: 90%;
+    margin: auto;
+}
+
+
+/* //null */
+/* //empty  */
+.empty-cart .menu-empty{
+    text-align: center;
+}
+.empty-cart .menu-empty .desc{
+    font-size: 3rem;
+    margin-bottom: .5rem;
+    font-weight: bolder;
+}
+.empty-cart .menu-empty .desc span path{
+    color: #fff;
+}
+.empty-cart .menu-empty .desc span svg{
+    margin-right: .5rem;
+    height: 3rem;
+}
+.empty-cart .menu-empty .desc:last-child{
+    color: #fff;
+}
+.empty-cart .menu-empty .desc:last-child:hover{
+    text-decoration: underline;
+    letter-spacing: .1rem;
+}
+
+@media (max-width: 900px) {
+    .bill{
+        display: block!important;
+    }
+    .bill .form-order{
+        border: none;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 4rem;
+    }
+    .bill .details-bill{
+        border: none;
+        width: 100%;
+        padding: 0;
+    }
+}

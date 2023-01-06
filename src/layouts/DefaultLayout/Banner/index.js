@@ -91,6 +91,12 @@ const banner = [
         imgSrc:  "",
     },
     {
+        id:"bill",
+        name: "bill",
+        slide: false,
+        imgSrc:  "",
+    },
+    {
         id:"no-found",
         name: "no-found",
         slide: false,
@@ -117,7 +123,7 @@ function Banner(props) {
         }
         
     }
-    if(selectedBanner.id==="search-results"){
+    if(selectedBanner.id==="search-results"||selectedBanner.id==="bill"){
         return (
             <div style={{paddingTop:"10rem"}}>
 
