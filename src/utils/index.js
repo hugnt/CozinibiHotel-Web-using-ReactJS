@@ -1,4 +1,4 @@
 export * from './slide';
-export * from './data';
 export * from './icons';
-export * from './reduxModule'
+export * from './reduxModule';
+// export * from './data.json'

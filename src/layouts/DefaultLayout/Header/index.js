@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 
 //redux
 import { connect } from 'react-redux';
-import { handleActiveMenu } from '~/utils';
+import { handleActiveMenu, handleData } from '~/utils';
 
 //hooks
 import { useState, useEffect } from 'react';
 
+//api
+import * as languageServices from '~/apiServices/languageServices';
+import * as layoutServices from '~/apiServices/layoutServices';
+
 //data 
-import { menuItem, languages, Icon } from '~/utils';
+import { Icon } from '~/utils';
 
 //css
 import './header.css';
@@ -18,12 +22,26 @@ import { SearchBox } from '~/components';
 
 const initActive = (window.innerWidth <=991)?true:false;
 const initDisplay = [false, false, false];
-function Header(props) {
-    let { activeMenu, handleActiveMenu } = props;
 
-    let [currLang, setCurrLang] = useState(languages[0]);
-    let [isActiveLang, setIsActiveLang] = useState(initActive);
-    let [isDisplayBlock, setIsDisplayBlock] = useState(initDisplay);
+function Header(props) {
+    let { activeMenu, handleActiveMenu, languages, menuItem, handleData } = props;
+    const [currLang, setCurrLang] = useState({});
+    const [isActiveLang, setIsActiveLang] = useState(initActive);
+    const [isDisplayBlock, setIsDisplayBlock] = useState(initDisplay);
+
+    useEffect(()=>{
+       const fetchApi = async() =>{
+            const res = await languageServices.getLanguage();
+            handleData("languages",res.data);
+            
+            setCurrLang(res.data[0]);
+
+            const res2 = await layoutServices.getMenuItem();
+            handleData("menuItem",res2.data);
+       }
+       fetchApi(); 
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     useEffect(()=>{
         const handleCheckWidth = () =>{
@@ -43,7 +61,7 @@ function Header(props) {
         let newArr = Array(3).fill(false);
         newArr[i] = !isDisplayBlock[i];
         setIsDisplayBlock(newArr);
-       
+
     }
     // console.log(isDisplayBlock);
 
@@ -68,7 +86,7 @@ function Header(props) {
                                         <span className="lang-current">{currLang.name}</span>
                                         {Icon("down")}
                                     </div>
-                                    {isActiveLang && <ul className="lang-option">
+                                    {languages&&isActiveLang && <ul className="lang-option">
                                         {
                                             languages.filter(langs => langs.id !== currLang.id).map(lang => {
                                                 return (
@@ -99,7 +117,7 @@ function Header(props) {
                         </div>
                         <nav className={`navbar menu-main d-flex ${(window.innerWidth <=1370)&&(isDisplayBlock[2]?"active":"un-active")}`} >
                             {
-                                menuItem.map((item, i) => {
+                                menuItem&&menuItem.map((item, i) => {
                                     var activeClass = "";
                                     var id = item.path.slice(1);
 
@@ -125,6 +143,10 @@ function Header(props) {
     );
 }
 
-const mapStateToProps = (state) => ({ activeMenu: state.activeMenu });
-const mapDispatchToProps = { handleActiveMenu }
+const mapStateToProps = (state) => ({ 
+    activeMenu: state.activeMenu, 
+    languages:state.languages,
+    menuItem:state.menuItem,
+});
+const mapDispatchToProps = { handleActiveMenu, handleData }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

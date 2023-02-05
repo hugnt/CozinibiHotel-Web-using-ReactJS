@@ -37,7 +37,7 @@ function SearchResults(props) {
                 {resRooms.length !== 0 && <div className='res-rooms'>
                     {
                         resRooms.map((item, i) => {
-                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={item.imgSrc} fontSize="1.5rem"
+                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={require(`src/assets/images/${item.imgSrc}`)} fontSize="1.5rem"
                                 color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50" subTitle={item.subTitle}
                                 textTransform="capitalize" textPos="right" link={`/accommodation/${item.id}`} />);
                         })
@@ -47,9 +47,9 @@ function SearchResults(props) {
                 {resTours.length !== 0 && <div className='res-tours'>
                     {
                         resTours.map((item, i) => {
-                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={item.imgSrc} fontSize="1.5rem"
+                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={require(`src/assets/images/${item.imgSrc}`)} fontSize="1.5rem"
                                 color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50" subTitle={item.subTitle}
-                                textTransform="capitalize" textPos="right" link={`/accommodation/${item.id}`} />);
+                                textTransform="capitalize" textPos="right" link={`/tour-travel/${item.id}`} />);
                         })
                     }
                 </div>}

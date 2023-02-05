@@ -5,6 +5,7 @@ import { handleActiveMenu } from '~/utils';
 //hook
 import { useEffect,useState } from 'react';
 
+
 //layout
 import Header from "./Header";
 import Footer from "./Footer";
@@ -21,32 +22,36 @@ import { useParams } from "react-router-dom";
 import {getTitle} from'./DefaultLayout.js'
 
 function DefaultLayout(props) {
-    let {bannerName, handleActiveMenu} = props;
+    let {bannerName, handleActiveMenu, rooms, tour_travels} = props;
     let {id} = useParams();
 
-    let [loading, setLoading] = useState(false);
+    let [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        setLoading(true);
-        setTimeout(()=>{
-            setLoading(false)
-        },800)
-    },[bannerName])
 
     //page title and active menu
     let pathName = window.location.pathname;
     useEffect(()=>{
         handleActiveMenu(pathName.split('/').at(1));
-        document.title = getTitle(bannerName,pathName,id);
+        document.title = getTitle(bannerName,pathName,id,rooms, tour_travels);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[pathName,bannerName,id,handleActiveMenu]);
 
-    // console.log("re-render");
+    useEffect(()=>{
+        setLoading(true);
+        fetch('https://63d7fd535c4274b136ffc3ea.mockapi.io/cozinibi-hotel/api/users')
+        .then(()=>setLoading(false))
+        .catch((err)=>{
+            console.log(err);
+            setLoading(true);
+        })
+    },[pathName])
     return ( 
         <div className="">
             <Header>
-                {!loading&&<Banner bannerName={bannerName} id={id} />}
+                {<Banner bannerName={bannerName} id={id} loading={loading}/>}
             </Header>
                 {!loading?<div className="">{props.children}</div>:<Loading/>}
+                {/* <Home /> */}
             <ToolBox />
             <Footer />
         </div>
@@ -54,6 +59,10 @@ function DefaultLayout(props) {
 }
 
 
-const mapStateToProps = (state) => ({ activeMenu: state.activeMenu});
+const mapStateToProps = (state) => ({ 
+    activeMenu: state.activeMenu,
+    rooms: state.rooms,
+    tour_travels: state.tour_travels,
+});
 const mapDispatchToProps = {handleActiveMenu}
 export default connect(mapStateToProps,mapDispatchToProps)(DefaultLayout);

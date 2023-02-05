@@ -1,3 +1,14 @@
+//redux
+import { connect } from "react-redux";
+import {handleData } from '~/utils';
+
+//hooks
+import {useEffect } from "react";
+
+//api
+import * as featureServices from '~/apiServices/featureServices';
+
+
 //icon
 import { Icon } from '~/utils';
 
@@ -5,26 +16,21 @@ import { Icon } from '~/utils';
 import './News.css'
 import { ArticlePart, Border, SectionPart } from '~/components';
 
-const news = [
-    {
-        name: "New modern devices and technologies",
-        param: "",
-        imgSrc: require("~/assets/images/news/news-item.jpg")
-    },
-    {
-        name: "Furnitures quality",
-        param: "",
-        imgSrc: require("~/assets/images/accommodation-banner.png"),
-    },
-    {
-        name: "Fresh environment",
-        param: "",
-        imgSrc: require("~/assets/images/news/news-item2.jpg"),
-    },
 
-]
+function News(props) {
+    let {news, handleData} = props;
 
-function News() {
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await featureServices.getNews();
+            handleData("news",res.data);
+     
+        }
+        if(news.length===0){
+            fetchApi();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [])
     return (
         <SectionPart bgColor="bg-white" >
             {news.map((item, i)=>{
@@ -33,7 +39,7 @@ function News() {
                         <ArticlePart title={item.name} fontTitle="2rem" width="w-50" 
                         classname="new-article" />
                         <div className='w-50 news-img'>
-                            <img src={item.imgSrc} alt='img' className='w-100'/>
+                            <img src={require(`src/assets/images/${item.imgSrc}`)} alt='img' className='w-100'/>
                         </div>
                     </Border>
                 );
@@ -49,5 +55,8 @@ function News() {
 
     );
 }
-
-export default News;
+const mapStateToProps = (state) => ({ 
+    news:state.news,
+});
+const mapDispatchToProps = { handleData }
+export default connect(mapStateToProps, mapDispatchToProps)(News);

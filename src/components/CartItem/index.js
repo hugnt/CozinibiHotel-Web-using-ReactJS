@@ -31,7 +31,7 @@ function CartItem(props) {
             {foodPicked.map((item, i) => {
                 return (
                     <div key={i} className='food-info'>
-                        <Item className="al-center food-item" imgSrc={item.food.imgSrc} 
+                        <Item className="al-center food-item" imgSrc={require(`src/assets/images/${item.food.imgSrc}`)} 
                             mainTitle={item.food.name} subTitle={item.food.type}
                             textPos="right" fontSize="1rem" textTransform="capitalize" 
                             width="w-60" imgWidth="w-40" imgHeight="4rem" contentWidth="w-60" />

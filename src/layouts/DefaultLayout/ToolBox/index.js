@@ -1,5 +1,5 @@
 //hooks
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo} from 'react';
 import { Cart } from '~/components';
 
 //redux
@@ -64,4 +64,4 @@ function ToolBox(props) {
 }
 
 const mapStateToProps = (state) => ({foodPicked:state.foodPicked});
-export default connect(mapStateToProps)(ToolBox);
+export default memo(connect(mapStateToProps)(ToolBox));

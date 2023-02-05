@@ -1,8 +1,13 @@
 //redux
 import { connect } from 'react-redux';
-import { handleAddFoods } from '~/utils';
+import { handleAddFoods, handleData } from '~/utils';
+
 //hooks
-// import { useState } from 'react';
+import { useEffect } from 'react';
+
+//api
+import * as menuServices from '~/apiServices/menuServices';
+
 
 //icon
 import { Icon } from '~/utils';
@@ -11,18 +16,27 @@ import { Icon } from '~/utils';
 import './Menu.css';
 import { Border, SectionPart, Item } from '~/components';
 
-//data
-import { foods } from '~/utils';
-
 
 
 
 function Menu(props) {
-    let { handleAddFoods, foodPicked } = props;
-    // let [toggleHeart, setToggleHeart] = useState(false);
+    let { handleAddFoods, foodPicked, foods, handleData } = props;
+
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await menuServices.getMenu();
+            handleData("foods",res.data);
+        
+        }
+        if(foods.length===0){
+            fetchApi();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [])
+
 
     const handleToggleHeart = (e) => {
-        console.log(e.target);
+        // console.log(e.target);
         e.target.classList.toggle('toggleHeart');
     }
     return (
@@ -33,7 +47,7 @@ function Menu(props) {
                         <Border key={food.id} color="gold" classname="w-30 wrapper-food">
                             <div className='price'><span>Price: ${food.price}</span></div>
                             <Item className="food-item" mainTitle={food.name}
-                                imgSrc={food.imgSrc} color="#fff" bgTitle={true}
+                                imgSrc={require(`src/assets/images/${food.imgSrc}`)} color="#fff" bgTitle={true}
                                 textPos="onBottom" textTransform="capitalize"
                                 fontSize='1.5rem' fontFamily='Font-Title' />
                             <div className='options'>
@@ -61,7 +75,7 @@ function Menu(props) {
     );
 }
 
-const mapStateToProps = (state) => ({ foodPicked: state.foodPicked })
-const mapDispatchToProps = { handleAddFoods }
+const mapStateToProps = (state) => ({ foodPicked: state.foodPicked, foods: state.foods })
+const mapDispatchToProps = { handleAddFoods, handleData }
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
 

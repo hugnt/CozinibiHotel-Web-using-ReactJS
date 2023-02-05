@@ -5,144 +5,85 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 
+//redux
+import { connect } from "react-redux";
+import {handleData } from '~/utils';
+
+//hooks
+import { Fragment, useState,useEffect } from "react";
+
+//api
+import * as bannerServices from '~/apiServices/bannerServices';
+import * as tourServices from '~/apiServices/tourServices';
+
 //icons & data
-import { Icon,rooms, tour_travels } from "~/utils";
+import { Icon} from "~/utils";
 
 //css
 import './banner.css'
 
-
 //Move Left Right
 import { handleMoveRight, handleMoveLeft} from '~/utils';
-import { Fragment } from "react";
 
-
-const banner = [
-    {
-        id:"home",
-        name: "home",
-        slide: true,
-        imgSrc: [
-            require("~/assets/images/home/banner1.jpeg"),
-             require("~/assets/images/home/banner2.jpg"),
-             require("~/assets/images/home/banner3.jpeg"),
-             require("~/assets/images/home/banner4.jpeg"),
-             require("~/assets/images/home/banner5.jpg"),
-        ]
-    }, 
-    {
-        id:"about-us",
-        name: "about us",
-        slide: false,
-        imgSrc:  require("~/assets/images/about_us/banner.jpeg"),
-    },
-    {
-        id:"accommodation",
-        name: "accommodation",
-        slide: false,
-        imgSrc:  require("~/assets/images/accommodation/banner.jpeg"),
-    },
-    {
-        id:"menu",
-        name: "menu",
-        slide: false,
-        imgSrc:  require("~/assets/images/menu/banner.gif"),
-    },
-    {
-        id:"tour-travel",
-        name: "tour travel",
-        slide: false,
-        imgSrc: require("~/assets/images/tour_travel/banner.gif"),
-    },
-    {
-        id:"service",
-        name: "service",
-        slide: false,
-        imgSrc:  require("~/assets/images/service/banner.gif"),
-    },
-    {
-        id:"news",
-        name: "news",
-        slide: false,
-        imgSrc:  require("~/assets/images/news/banner.jpg"),
-    },
-    {
-        id:"gallery",
-        name: "gallery",
-        slide: false,
-        imgSrc:  require("~/assets/images/gallery/banner-gallery.jpg"),
-    },
-    {
-        id:"contact",
-        name: "contact",
-        slide: false,
-        imgSrc:  require("~/assets/images/contact/contact-banner.png"),
-    },
-    {
-        id:"booking",
-        name: "booking",
-        slide: false,
-        imgSrc:  require("~/assets/images/booking.jpeg"),
-    },
-    {
-        id:"search-results",
-        name: "search-results",
-        slide: false,
-        imgSrc:  "",
-    },
-    {
-        id:"bill",
-        name: "bill",
-        slide: false,
-        imgSrc:  "",
-    },
-    {
-        id:"no-found",
-        name: "no-found",
-        slide: false,
-        imgSrc:  require("~/assets/images/404-banner.gif"),
-    },
-];
-
-
-
+const errorBanner =  {
+    id:"no-found",
+    name: "no-found",
+    slide: false,
+    imgSrc:  "404-banner.gif",
+}
 
 function Banner(props) {
-    let {bannerName, id} = props;
-    
-    var selectedBanner = banner.find(x => x.id === bannerName);
-    if(id){
-        if(bannerName==="roomDetails"){
-            selectedBanner = rooms.find(x => x.id === id);
+    let {loading,bannerName, id, banner, rooms, tour_travels, handleData} = props;
+    const [selectedBanner, setSelectedBanner] = useState();
+
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await bannerServices.getBanner();
+            handleData("banner",res.data);
+            setSelectedBanner(res.data.find(x => x.id === bannerName));
+
+            const res3 = await tourServices.getTour();
+            handleData("tour_travels",res3.data);
         }
-        else if(bannerName==="tourDetails"){
-            selectedBanner = tour_travels.find(x => x.id === id);
+        fetchApi();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [])
+    useEffect(()=>{
+        setSelectedBanner(banner.find(x => x.id === bannerName));
+        if(id){
+            if(bannerName==="roomDetails"){
+                setSelectedBanner(rooms.find(x => x.id === id));
+            }
+            else if(bannerName==="tourDetails"){
+                setSelectedBanner(tour_travels.find(x => x.id === id));
+            }
+            else{
+                setSelectedBanner(errorBanner);
+            }    
         }
-        else{
-            selectedBanner = banner.at(-1);
+        if(!selectedBanner){
+            setSelectedBanner(errorBanner);
         }
-        
-    }
-    if(selectedBanner.id==="search-results"||selectedBanner.id==="bill"){
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[bannerName, id, rooms,tour_travels])
+   
+    if(selectedBanner&&(selectedBanner.id==="search-results"||selectedBanner.id==="bill")){
         return (
             <div style={{paddingTop:"10rem"}}>
 
             </div>
         );
     }
-    if(!selectedBanner){
-        selectedBanner = banner.at(-1);
-    }
     // console.log(selectedBanner);
     return (
         <Fragment>
-            {selectedBanner.name==="home"&&<div className="banner swiper position-relative">
+            {!loading&&selectedBanner&&selectedBanner.name==="home"&&<div className="banner swiper position-relative">
                 <Swiper className="banner-slider" id="sl-01" pagination={true} modules={[Pagination]} loop={true} >
                     {
                         selectedBanner.imgSrc.map((img, i) => {
                             return (
                                 <SwiperSlide key={i} className="banner-slide-img w-100 swiper-slide">
-                                    <img src={img}
+                                    <img src={require(`src/assets/images/${img}`)}
                                     alt="" className="w-100" />
                                 </SwiperSlide>
                             );
@@ -159,9 +100,9 @@ function Banner(props) {
                     </span>
                 </div>
             </div>}
-            {(selectedBanner.name!=="home"&&selectedBanner)&&
+            {!loading&&selectedBanner&&selectedBanner.name!=="home"&&
                 <div className="banner position-relative">
-                    <div className="banner-image"><img src={selectedBanner.imgSrc} alt="" /></div>
+                    <div className="banner-image"><img src={require(`src/assets/images/${selectedBanner.imgSrc}`)} alt="" /></div>
                     <div className="banner-tilte position-absolute"><span>{selectedBanner.name}</span></div>
                 </div>
             }
@@ -169,4 +110,10 @@ function Banner(props) {
     );
 }
 
-export default Banner;
+const mapStateToProps = (state) => ({ 
+    banner:state.banner,
+    rooms:state.rooms,
+    tour_travels:state.tour_travels
+});
+const mapDispatchToProps = { handleData }
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

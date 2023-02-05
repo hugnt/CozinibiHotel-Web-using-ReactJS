@@ -4,13 +4,25 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination ,Navigation} from "swiper";
 import "swiper/css/navigation";
-import { Fragment } from 'react';
+import { Fragment} from 'react';
+
+//redux
+import { connect } from 'react-redux';
+import {handleData } from '~/utils';
+
+//hook
+import { useEffect } from "react";
+
+//api
+import * as menuServices from "~/apiServices/menuServices";
+import * as  hightlightServices from "~/apiServices/hightlightServices";
+import  * as  commandServices from "~/apiServices/commandServices";
 
 //Move Left Right
 import { handleMoveRight, handleMoveLeft } from '~/utils';
 
 //data & icons
-import {rooms, tour_travels, foods, services, hightlights, commands, Icon} from '~/utils'
+import {Icon} from '~/utils'
 
 //Components
 import { ArticlePart, SectionPart, Room, Title, Item, Border, Comment } from '~/components';
@@ -19,10 +31,30 @@ import { ArticlePart, SectionPart, Room, Title, Item, Border, Comment } from '~/
 //css & js
 import './home.css';
 
-// import './home.js';
+function Home(props) {
+    let {rooms, foods,hightlights,commands,tour_travels, services, handleData} = props;
 
+    
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await menuServices.getMenu();
+            handleData("foods",res.data);
+          
+            const res2 = await hightlightServices.getHightlight();
+            handleData("hightlights",res2.data);
 
-function Home() {
+            const res3 = await commandServices.getCommand();
+            handleData("commands",res3.data);
+        
+        }
+        if(rooms.length===0||foods.length===0||commands.length===0){
+            fetchApi();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+    
+
+    
     return (
         <div>
             <SectionPart sectionName={"home-intro"} flexContent={true} bgColor="bg-white">
@@ -31,8 +63,8 @@ function Home() {
                      classname="home-intro-param" link={"/about-us"} ending="Read more"/>
                 </div>
                 <div className="intro-type_room d-flex w-70">
-                    {rooms.map((room, i) => {
-                        return <Room key={i} name={room.name} width="w-30" imgSrc={room.imgSrc} link={`/accommodation/${room.id}`}/>
+                    {rooms&&rooms.map((room, i) => {
+                        return <Room key={i} name={room.name} width="w-30" imgSrc={require(`src/assets/images/${room.imgSrc}`)} link={`/accommodation/${room.id}`}/>
                     })}
                 </div>
             </SectionPart>
@@ -40,12 +72,11 @@ function Home() {
             <SectionPart sectionName={"tour_travel"} flexContent={false}>
                 <Title name="tour travel" type="underline" color="#fff" pos="center" />
                 <div className="row d-flex">
-                    {tour_travels.map((item, i) => {
-                        return (
-                            <Item key={i} className="cp-item" mainTitle={item.title} imgSrc={item.imgSrc} 
+                    {tour_travels&&tour_travels.map((item, i) => {
+                        return <Item key={i} className="cp-item" mainTitle={item.title} 
+                            imgSrc={require(`src/assets/images/${item.imgSrc}`)} 
                             color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50" 
                             textTransform="capitalize" textPos="right" link={`/tour-travel/${item.id}`}/>
-                        );
                     })}
                 </div>
             </SectionPart>
@@ -57,10 +88,10 @@ function Home() {
                     <Border color="gold">
                         <Swiper className="food-slider" id="sl-01" modules={[Pagination]} loop={true}>
                             {
-                                foods.map((food, i) => {
+                                foods&&foods.map((food, i) => {
                                     return (
                                         <SwiperSlide key={i} className="w-100 swiper-slide">
-                                            <Item className="food-item" mainTitle={food.name} imgSrc={food.imgSrc} color="#fff" 
+                                            <Item className="food-item" mainTitle={food.name} imgSrc={require(`src/assets/images/${food.imgSrc}`)} color="#fff" 
                                             bgTitle={true} textPos="onBottom" textTransform="capitalize" fontSize='1.5rem' 
                                             fontFamily='Font-Title' link="/menu"/>
                                         </SwiperSlide>
@@ -82,10 +113,10 @@ function Home() {
                 <div className="service w-50">
                     <Title name="services" type="haft-underline" color="#000" pos="left" />
                     <div className="sv-content">
-                        {services.map((service, i) => {
+                        {services&&services.map((service, i) => {
                             return (
                                 <Border key={i} color="black" classname="w-48 sv-wrapper-item">
-                                    <Item className="sv-item" mainTitle={service.name} imgSrc={service.imgSrc}
+                                    <Item className="sv-item" mainTitle={service.name} imgSrc={require(`src/assets/images/${service.imgSrc}`)}
                                         color="#000" textPos="inBottom center" textTransform="uppercase" fontSize='1.5rem' 
                                         fontFamily='Font-Title' link="/service"/>
                                 </Border>
@@ -101,11 +132,11 @@ function Home() {
                 <Title name="NEW HIGHLIGHTS" type="underline" color="#fff" pos="center" />
                 <div className="content d-flex">
                     {
-                        hightlights.map((item, i) => {
+                        hightlights&&hightlights.map((item, i) => {
                             return (
                                 <div className='w-20 item' key={i}>
                                     <Border classname="border-circle">
-                                        <Item className="" imgSrc={item.imgSrc}
+                                        <Item className=""  imgSrc={require(`src/assets/images/${item.imgSrc}`)} 
                                             color="#fff" />
                                     </Border>
                                     <Title name={item.name} color="#fff" pos="center" fontSize="1.2rem" />
@@ -122,7 +153,7 @@ function Home() {
                 <Swiper className="comment-slider"  modules={[Navigation]} loop={true} 
                     spaceBetween={100} navigation={true} >
                     {
-                        commands.map((cmt, i) => {
+                        commands&&commands.map((cmt, i) => {
                             if(i%2!==0||i===commands.length-1){
                                 return <Fragment key={i}></Fragment>
                             }
@@ -143,4 +174,13 @@ function Home() {
     );
 }
 
-export default Home;
+const mapStateToProps = (state) => ({ 
+    rooms: state.rooms, 
+    tour_travels: state.tour_travels, 
+    foods: state.foods, 
+    services: state.services, 
+    hightlights: state.hightlights, 
+    commands: state.commands, 
+});
+const mapDispatchToProps = {handleData};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

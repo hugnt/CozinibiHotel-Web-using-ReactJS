@@ -10,6 +10,22 @@ const initial = {
     foodPicked:[
         
     ],
+    languages:[],
+    banner:[],
+    menuItem:[],
+    rooms:[],
+    services:[],
+    tour_travels:[],
+    foods:[],
+    commands:[],
+    hightlights:[],
+    features:[],
+    roomDetails:[],
+    tourDetails:[],
+    tripSchedule:[],
+    news:[],
+    pictures:[],
+
 }
 
 export const reducer = (state = initial, action) => {
@@ -65,6 +81,14 @@ export const reducer = (state = initial, action) => {
                 ...state,
                 foodPicked:[...listFoods]
             }}
+        case "handleData":{
+            // console.log("inmodule: ",action.name);
+            let selectedData = Object.keys(state).find(x=>x===action.name);
+            state[selectedData] = action.value;
+            return {
+                ...state
+            }
+        }
         default:
             return state;
     }
@@ -99,6 +123,16 @@ export const handleRemoveFoods = (food) => {
     return{
         type: "handleRemoveFoods",
         value: food
+    }
+}
+
+
+//data 
+export const handleData = (name,data) => {
+    return{
+        type: "handleData",
+        name: name,
+        value: data,
     }
 }
 

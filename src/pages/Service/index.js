@@ -1,42 +1,32 @@
-import { SectionPart, Border, Item, ArticlePart } from '~/components';
-//css
-import './Service.css'
-
 //slides
-import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+
+//redux
+import { connect } from "react-redux";
+
+//hooks
+import {useState } from "react";
+
+
+//components
 import { FreeMode, Navigation, Thumbs } from "swiper";
 
 
+import { SectionPart, Border, Item, ArticlePart } from '~/components';
+//css
+import './Service.css'
 
-const services = [
-    {
-        name: "massage & sauna",
-        icon: require("~/assets/images/service/ser-1.png"),
-        imgSrc: require("~/assets/images/service/service-item1.jpg"),
-    },
-    {
-        name: "wedding",
-        icon: require("~/assets/images/service/ser-2.png"),
-        imgSrc: require("~/assets/images/service/service-item2.jpg"),
-    },
-    {
-        name: "MEETING & EVENTS",
-        icon: require("~/assets/images/service/ser-3.png"),
-        imgSrc: require("~/assets/images/service/service-item3.jpg"),
-    },
-    {
-        name: "CHARLES BAR",
-        icon: require("~/assets/images/service/ser-4.png"),
-        imgSrc: require("~/assets/images/service/service-item4.jpg"),
-    },
-];
 
-function Service() {
+
+
+
+
+function Service(props) {
+    let {services} = props;
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [active, setActive] = useState(null);
 
@@ -79,7 +69,7 @@ function Service() {
                     return (
                         <SwiperSlide key={i} onClick={()=>handleActiveItem(i)}> 
                             <Border color="black" classname="w-100 sv-wrapper-item">
-                                <Item className={`sv-item ${activeClass}`} mainTitle={service.name} imgSrc={service.icon} imgHeight="5rem"
+                                <Item className={`sv-item ${activeClass}`} mainTitle={service.name} imgSrc={require(`src/assets/images/${service.imgSrc}`)} imgHeight="5rem"
                                     color="#000" textPos="inBottom" textTransform="uppercase" fontSize='1.5rem' fontFamily='Font-Title' />
                             </Border>
                         </SwiperSlide>
@@ -100,7 +90,7 @@ function Service() {
                 {services.map((service, i) => {
                     return (
                         <SwiperSlide key={i}>
-                            <Border color="black" classname="sv-intro-item" bgNow= {service.imgSrc}> 
+                            <Border color="black" classname="sv-intro-item" bgNow= {require(`src/assets/images/${service.imgSrc2}`)}> 
                                 <ArticlePart title={service.name} param={service.param}
                                     color="var(--gold)" width="w-30" classname="bg-trans sv-article-wrapper" 
                                     paramColor="#fff" textAlignParam="left" limitLine="8"/>
@@ -112,4 +102,7 @@ function Service() {
     );
 }
 
-export default Service;
+const mapStateToProps = (state) => ({ 
+    services:state.services,
+});
+export default connect(mapStateToProps)(Service);

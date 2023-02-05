@@ -4,15 +4,34 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, EffectCoverflow } from "swiper";
 
+//redux
+import { connect } from "react-redux";
+import {handleData } from '~/utils';
+
+//hooks
+import { Fragment,useEffect } from "react";
+
+//api
+import * as featureServices from '~/apiServices/featureServices';
+
 //css
 import { SectionPart, Title } from '~/components';
 import './Gallery.css'
 
-//data
-import { pictures } from '~/utils';
-import { Fragment } from 'react';
 
-function Gallery() {
+function Gallery(props) {
+    let {pictures, handleData} = props;
+
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await featureServices.getPicture();
+            handleData("pictures",res.data);
+        }
+        if(pictures.length===0){
+            fetchApi();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [])
     return (
         <Fragment>
             <SectionPart bgColor="bg-white" classname="">
@@ -36,10 +55,10 @@ function Gallery() {
                     className="pics-slide"
                 >
                 {
-                    [...pictures.hotel].map((ht, i) => {
+                    pictures.length!==0&&pictures.find(x => x.id === 'hotel').imgSrc.map((ht, i) => {
                         return (
                             <SwiperSlide key={i}>
-                                <img src={ht} alt="img" className="w-100"/>
+                                <img src={require(`src/assets/images/${ht}`)} alt="img" className="w-100"/>
                             </SwiperSlide>
                         );
                     })
@@ -67,10 +86,10 @@ function Gallery() {
                     className="pics-slide"
                 >
                 {
-                    [...pictures.travel].map((ht, i) => {
+                    pictures.length!==0&&pictures.find(x => x.id === 'travel').imgSrc.map((ht, i) => {
                         return (
                             <SwiperSlide key={i}>
-                                <img src={ht} alt="img" className="w-100"/>
+                                <img src={require(`src/assets/images/${ht}`)} alt="img" className="w-100"/>
                             </SwiperSlide>
                         );
                     })
@@ -81,5 +100,9 @@ function Gallery() {
         </Fragment>
     );
 }
-
-export default Gallery;
+const mapStateToProps = (state) => ({ 
+    pictures:state.pictures,
+   
+});
+const mapDispatchToProps = { handleData }
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

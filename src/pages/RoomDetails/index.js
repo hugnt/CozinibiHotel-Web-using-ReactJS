@@ -1,6 +1,5 @@
 
 //slides
-import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -11,13 +10,22 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 //getParam url
 import { useParams } from "react-router-dom";
 
+//redux
+import { connect } from "react-redux";
+import {handleData } from '~/utils';
+
+//hooks
+import { useState,useEffect } from "react";
+
+//api
+import * as roomServices from '~/apiServices/roomServices';
 //css
 import { Border, FormBooking, Item, SectionPart, Title } from '~/components';
 import './RoomDetails.css'
 
 
 //icons & data
-import { Icon, roomDetails, getRoomDetails } from "~/utils";
+import { Icon } from "~/utils";
 
 const itemInfors = [
     {
@@ -38,16 +46,36 @@ const itemInfors = [
     },
 ];
 
-function RoomDetails() {
+function RoomDetails(props) {
+    let {handleData, roomDetails} = props;
     let {id} = useParams();
-    let selectedRoom = getRoomDetails(id);
-    let specifics= [...Object.values(selectedRoom.specifications)]
+    const [selectedRoom, setSelectedRoom] = useState();
+    const [specifics, setSpecifics] = useState();
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  
+    useEffect(()=>{
+        const fetchApi = async() =>{
+            const res = await roomServices.getRoomDetails();
+            handleData("roomDetails",res.data);
+            setSelectedRoom(res.data.find(item => item.id===id));
+            setSpecifics([...Object.values(res.data.find(item => item.id===id).specifications)]);
+        }
+        if(roomDetails.length===0){
+            fetchApi();
+        }
+        else{
+            setSelectedRoom(roomDetails.find(item => item.id===id));
+            setSpecifics([...Object.values(roomDetails.find(item => item.id===id).specifications)]);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, [])
+
+   
     return (
         <SectionPart bgColor="bg-white" classname="accommodation_2">
             <div className="content d-flex w-100">
                 <div className="content-main w-65">
-                    <Title name={selectedRoom.name} type="haft-underline" />
+                {selectedRoom&&<Title name={selectedRoom.name} type="haft-underline" />}
                     <div className="box-pic" >
                         <div className="box-pic-main position-relative">
                             <Swiper
@@ -61,10 +89,10 @@ function RoomDetails() {
                                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                                 modules={[FreeMode, Navigation, Thumbs]}
                                 className="mySwiper2 slide-show">
-                                {selectedRoom.listImg.map((image, i) => {
+                                {selectedRoom&&selectedRoom.listImg.map((image, i) => {
                                     return (
                                         <SwiperSlide key={i}>
-                                            <img src={image} alt="img" />
+                                            <img src={require(`src/assets/images/${image}`)} alt="img" />
                                         </SwiperSlide>
                                     );
                                 })}
@@ -78,10 +106,10 @@ function RoomDetails() {
                                     watchSlidesProgress={true}
                                     modules={[FreeMode, Navigation, Thumbs]}
                                     className="mySwiper list-slides">
-                                    {selectedRoom.listImg.map((image, i) => {
+                                    {selectedRoom&&selectedRoom.listImg.map((image, i) => {
                                         return (
                                             <SwiperSlide key={i}>
-                                                <img src={image} alt="" />
+                                                <img src={require(`src/assets/images/${image}`)} alt="" />
                                             </SwiperSlide>
                                         );
                                     })}
@@ -89,7 +117,7 @@ function RoomDetails() {
                             </div>
                         </div>
                         <div className="box-pic-desc d-flex">
-                            {itemInfors.map((item, i) => {
+                            {specifics&&itemInfors.map((item, i) => {
                                 var title = item.title + ": "+specifics[i];
                                 // console.log(title);
                                 return (
@@ -101,12 +129,12 @@ function RoomDetails() {
                     </div>
                     <div className="box-desc" style={{ lineHeight: "2rem" }}>
                         <Title name="Decription" fontSize="2rem" />
-                        <p style={{ fontSize: "1.2rem" }}>{selectedRoom.desc}</p>
+                        <p style={{ fontSize: "1.2rem" }}>{selectedRoom&&selectedRoom.desc}</p>
                     </div>
                     <div className="box-equipments">
-                        <span className="title">{selectedRoom.name} equipments</span>
+                        <span className="title">{selectedRoom&&selectedRoom.name} equipments</span>
                         <div className="list-equips">
-                            {selectedRoom.equipments.map((item, i) => {
+                            {selectedRoom&&selectedRoom.equipments.map((item, i) => {
                                 return (
                                     <div key={i} className="equip-item d-flex">
                                         <span className="check-icon">{Icon("check")}</span>
@@ -123,10 +151,10 @@ function RoomDetails() {
                     <div className="other_rooms">
                         <Title name="OTHER ROOMS" fontSize="2rem" />
                         <div className="list-rooms">
-                            {roomDetails.filter(rooms => rooms.name !== selectedRoom.name).map((room, i) => {
+                            {selectedRoom&&roomDetails&&roomDetails.filter(rooms => rooms.name !== selectedRoom.name).map((room, i) => {
                                 return (
                                     <Border key={i} color="gold" classname="other-room-item">
-                                        <Item className="al-center " imgSrc={room.listImg[0]} mainTitle={room.name}
+                                        <Item className="al-center " imgSrc={require(`src/assets/images/${room.listImg[0]}`)} mainTitle={room.name}
                                             textPos="right" fontSize="1.5rem" textTransform="uppercase" fontFamily='Font-Title'
                                             width="w-100" imgWidth="w-50" imgHeight="10rem" contentWidth="w-40" link={`/accommodation/${room.id}`} />
                                     </Border>
@@ -139,5 +167,8 @@ function RoomDetails() {
         </SectionPart>
     );
 }
-
-export default RoomDetails;
+const mapStateToProps = (state) => ({ 
+    roomDetails:state.roomDetails,
+});
+const mapDispatchToProps = { handleData }
+export default connect(mapStateToProps, mapDispatchToProps)(RoomDetails);

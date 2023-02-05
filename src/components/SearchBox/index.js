@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { handleSearchResult } from '~/utils';
 
 //icon
-import { Icon, rooms, tour_travels } from '~/utils';
+import { Icon } from '~/utils';
 //comp
 import Item from '../Item';
 //css
@@ -26,6 +26,7 @@ function SearchBox(props) {
     const debounced = useDebounce(searchTerm, 500);
     // console.log(debounced);
 
+    
     const handleSearchTermChange = (e) => {
         let value = e.target.value.trim();
         if (value === '') {
@@ -45,11 +46,16 @@ function SearchBox(props) {
 
 
     useEffect(() => {
-        debounced.trim() && setResTerm(() => {
-            const resRoom = rooms.filter(rooms => rooms.name.trim().includes(debounced));
-            const resTour = tour_travels.filter(tour_travels => tour_travels.name.trim().includes(debounced));
-            return [...resRoom,...resTour]
-        });
+        fetch(`https://63d7fd535c4274b136ffc3ea.mockapi.io/cozinibi-hotel/api/search?name=${debounced}`)
+        .then(res=>res.json())
+        .then(res=>{debounced.trim()&&setResTerm(res)})
+        .catch(err=>console.log(err))
+        // debounced.trim() && setResTerm(() => {
+        //     const resRoom = rooms.filter(rooms => rooms.name.trim().includes(debounced));
+        //     const resTour = tour_travels.filter(tour_travels => tour_travels.name.trim().includes(debounced));
+        //     return [...resRoom,...resTour]
+        // });
+        
     }, [debounced])
 
 
@@ -71,7 +77,7 @@ function SearchBox(props) {
                 <div className='res-box'>
                     {resTerm.length !== 0 && resTerm.map((item, i) => {
                         return (
-                            <Item key={i} className="al-center res-item" imgSrc={item.imgSrc} mainTitle={item.name} subTitle={item.type}
+                            <Item key={i} className="al-center res-item" imgSrc={require(`src/assets/images/${item.imgSrc}`)} mainTitle={item.name} subTitle={item.type}
                                 textPos="right" fontSize="1rem" textTransform="capitalize"
                                 width="w-100" imgWidth="w-40" imgHeight="4rem" contentWidth="w-50" link={`/${item.parentId}/${item.id}`}/>
                         );

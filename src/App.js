@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './utils';
 
+
 import {publicRoutes} from '~/routes'
 import { DefaultLayout } from '~/layouts';
 
@@ -20,8 +21,7 @@ function App() {
               let Layout = DefaultLayout;
               const Page = route.component;
               var namePage = route.name;
-              // console.log(namePage);
-              return <Route key={i} path={route.path} element={<Layout bannerName={namePage}><Page /></Layout>}/>
+              return <Route key={i} path={route.path} element={<Layout bannerName={namePage}><Page/></Layout>}/>
   
             })}
           </Routes>

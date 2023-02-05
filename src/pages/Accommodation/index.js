@@ -7,11 +7,13 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
+
+//redux
+import { connect } from "react-redux";
+
 //Link
 import { Link } from "react-router-dom";
 
-//icon
-import {rooms} from '~/utils';
 
 //cps
 import { ArticlePart, SectionPart, Item } from '~/components';
@@ -19,7 +21,8 @@ import { ArticlePart, SectionPart, Item } from '~/components';
 //css
 import './Accommodation.css';
 
-function Accommodation() { 
+function Accommodation(props) { 
+    let {rooms} = props;
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
@@ -43,7 +46,7 @@ function Accommodation() {
                                     <div className="current-slide d-flex">
                                         <Link to={`/accommodation/${room.id}`} className="current-img w-60">
                                             <img
-                                                src={room.imgSrc}
+                                                src={require(`src/assets/images/${room.imgSrc}`)}
                                                 alt=""
                                             />
                                         </Link>
@@ -91,7 +94,7 @@ function Accommodation() {
                                 {rooms.map((room, i) => {
                                     return (
                                         <SwiperSlide key={i}>
-                                            <Item className="al-center acc-item" imgSrc={room.imgSrc} mainTitle={room.name} subTitle={room.type}
+                                            <Item className="al-center acc-item" imgSrc={require(`src/assets/images/${room.imgSrc}`)} mainTitle={room.name} subTitle={room.type}
                                                 textPos="right" fontSize="1.5rem" textTransform="uppercase" fontFamily='Font-Title'
                                                 width="w-100" imgWidth="w-60" imgHeight="8rem" contentWidth="w-40" />
                                         </SwiperSlide>
@@ -110,4 +113,7 @@ function Accommodation() {
     );
 }
 
-export default Accommodation;
+const mapStateToProps = (state) => ({ 
+    rooms:state.rooms,
+});
+export default connect(mapStateToProps)(Accommodation);

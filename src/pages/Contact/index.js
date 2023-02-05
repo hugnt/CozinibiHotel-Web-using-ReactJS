@@ -7,7 +7,35 @@ import './Contact.css'
 import { Fragment, useEffect, useState } from 'react';
 import { SectionPart, Title } from '~/components';
 
-import { contacts } from '~/utils';
+import { icons } from '~/utils';
+const contacts = [
+    {
+        name:"address",
+        info:"P.1505 - A2 Ecolife Capitol Building 58 To Huu, Thanh Xuan, Hanoi",
+        icon:icons[0].icon,
+    },
+    {
+        name:"phone",
+        info:"(024) .3783.5639 - (024) .3783.5640",
+        icon:icons[1].icon,
+    },
+    {
+        name:"print",
+        info:"(024) 3,783,5641",
+        icon:icons[2].icon,
+    },
+    {
+        name:"mail",
+        info:"info@adcvietnam.net",
+        icon:icons[3].icon,
+    },
+    {
+        name:"web",
+        info:"www.adcvietnam.net",
+        icon:icons[4].icon,
+    },
+
+];
 const initData = {
     name: "",
     email: "",

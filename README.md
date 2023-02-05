@@ -12,6 +12,8 @@
         + React Hook Form
         + React Router DOM
         + Redux module
+    - Data:
+        + RESTful API 
     - Skills
         + Responsive (multi-devices)
         + Debounce (searching)
@@ -38,6 +40,8 @@
         + @fortawesome/react-fontawesome (v 0.2.0)
     - Slides
         + swiper(v 8.4.5)
+    - API:
+        + axios(v 1.3.0)
 
 4. References documantation
     - W3S
@@ -45,6 +49,7 @@
     - Stackover flow
     - React Router Dom
     - F8 
+    - MockApi
 
 5. What is special about this project?
     - Using CRS and SGP 
@@ -53,20 +58,13 @@
     - No redering when users access the before page has been visited
     - Avoid with send a lot of requests for server side 
     - Small Capacity (with program)
+    - Data saving and access by calling API
 
 6. How to run this program?
     - Firstly, you have to clone these code above (git clone https://github.com/hugnt/CozinibiHotel-Web-using-ReactJS) into your specify folder
-    - Install nodemodules
-    - Reconfig file package.json, in "scripts" change:
-        "scripts": {
-            "start": "react-app-rewired start",
-            "build": "react-app-rewired build",
-            "test": "react-app-rewired test",
-            "eject": "react-app-rewired eject"
-        },
-    (For overding the default create-react-app)
-    - Adding libuaries above
-    - Pointing to the project and type: npm start
+    - Open Terminal
+    - Install nodemodules (npm install)
+    - Pointing to the project (npm start)
     - Enjoy
 
 
