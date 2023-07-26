@@ -25,6 +25,8 @@ const initial = {
     tripSchedule:[],
     news:[],
     pictures:[],
+    articles:[],
+    information:[],
 
 }
 
@@ -49,7 +51,7 @@ export const reducer = (state = initial, action) => {
             }}
         case "handleAddFoods":
             {let listFoods = [...state.foodPicked];
-            let sameFood = listFoods.find(x => x.food.id===action.value.id);
+            let sameFood = listFoods.find(x => x.food.id==action.value.id);
             if(sameFood){
                 sameFood.number+=1;
             }

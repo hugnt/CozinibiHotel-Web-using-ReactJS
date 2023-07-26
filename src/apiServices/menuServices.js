@@ -3,7 +3,8 @@ import * as request from '~/utils/request';
 
 export const getMenu = async() => {
     try {
-        const res = await request.get('foods');
+        var res = await request.get('Food');
+        res = res.filter(e => e.isActive == true);
         return res;
     } catch (error) {
         console.log(error);

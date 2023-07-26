@@ -23,7 +23,7 @@ function News(props) {
     useEffect(()=>{
         const fetchApi = async() =>{
             const res = await featureServices.getNews();
-            handleData("news",res.data);
+            handleData("news",res);
      
         }
         if(news.length===0){
@@ -34,12 +34,13 @@ function News(props) {
     return (
         <SectionPart bgColor="bg-white" >
             {news.map((item, i)=>{
+                const image =  process.env.REACT_APP_IMAGE_URL + "news/" + item.image;
                 return (
                     <Border key={i} color="gold" classname="d-flex new-wrapper">
                         <ArticlePart title={item.name} fontTitle="2rem" width="w-50" 
-                        classname="new-article" />
+                        classname="new-article" param={item.description}/>
                         <div className='w-50 news-img'>
-                            <img src={require(`src/assets/images/${item.imgSrc}`)} alt='img' className='w-100'/>
+                            <img src={image} alt='img' className='w-100'/>
                         </div>
                     </Border>
                 );

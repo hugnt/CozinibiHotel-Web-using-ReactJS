@@ -31,26 +31,31 @@ function DefaultLayout(props) {
     //page title and active menu
     let pathName = window.location.pathname;
     useEffect(()=>{
+        console.log("bannerName:", bannerName)
         handleActiveMenu(pathName.split('/').at(1));
-        document.title = getTitle(bannerName,pathName,id,rooms, tour_travels);
+        if(rooms){
+            
+            document.title = getTitle(bannerName,pathName,id,rooms, tour_travels);
+        }
+        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[pathName,bannerName,id,handleActiveMenu]);
 
-    useEffect(()=>{
-        setLoading(true);
-        fetch('https://63d7fd535c4274b136ffc3ea.mockapi.io/cozinibi-hotel/api/users')
-        .then(()=>setLoading(false))
-        .catch((err)=>{
-            console.log(err);
-            setLoading(true);
-        })
-    },[pathName])
+    // useEffect(()=>{
+    //     setLoading(true);
+    //     fetch('https://63d7fd535c4274b136ffc3ea.mockapi.io/cozinibi-hotel/api/users')
+    //     .then(()=>setLoading(false))
+    //     .catch((err)=>{
+    //         console.log(err);
+    //         setLoading(true);
+    //     })
+    // },[pathName])
     return ( 
         <div className="">
             <Header>
-                {<Banner bannerName={bannerName} id={id} loading={loading}/>}
+                {<Banner bannerName={bannerName} id={id} loading={false}/>}
             </Header>
-                {!loading?<div className="">{props.children}</div>:<Loading/>}
+                {<div className="">{props.children}</div>}
                 {/* <Home /> */}
             <ToolBox />
             <Footer />

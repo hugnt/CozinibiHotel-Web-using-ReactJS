@@ -9,10 +9,12 @@ import { connect } from "react-redux";
 import {handleData } from '~/utils';
 
 //hooks
-import { Fragment,useEffect } from "react";
+import { Fragment,useEffect, useState } from "react";
 
 //api
 import * as featureServices from '~/apiServices/featureServices';
+import * as galleryServices from '~/apiServices/galleryServices';
+
 
 //css
 import { SectionPart, Title } from '~/components';
@@ -21,15 +23,18 @@ import './Gallery.css'
 
 function Gallery(props) {
     let {pictures, handleData} = props;
+    const [hotelGallery, setHotelGallery] = useState();
+    const [tourGallery, setTourGallery] = useState();
 
     useEffect(()=>{
         const fetchApi = async() =>{
-            const res = await featureServices.getPicture();
-            handleData("pictures",res.data);
+            const res = await galleryServices.getGalleryByCategory("Accommodation");
+            setHotelGallery(res);
+
+            const res2 = await galleryServices.getGalleryByCategory("Tour Travel");
+            setTourGallery(res2);
         }
-        if(pictures.length===0){
-            fetchApi();
-        }
+        fetchApi();  
         // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [])
     return (
@@ -55,10 +60,11 @@ function Gallery(props) {
                     className="pics-slide"
                 >
                 {
-                    pictures.length!==0&&pictures.find(x => x.id === 'hotel').imgSrc.map((ht, i) => {
+                    hotelGallery&&hotelGallery.map((ht, i) => {
+                        const image =  process.env.REACT_APP_IMAGE_URL + "gallery/" + ht.image;
                         return (
                             <SwiperSlide key={i}>
-                                <img src={require(`src/assets/images/${ht}`)} alt="img" className="w-100"/>
+                                <img src={image} alt="img" className="w-100"/>
                             </SwiperSlide>
                         );
                     })
@@ -86,10 +92,11 @@ function Gallery(props) {
                     className="pics-slide"
                 >
                 {
-                    pictures.length!==0&&pictures.find(x => x.id === 'travel').imgSrc.map((ht, i) => {
+                    tourGallery&&tourGallery.map((ht, i) => {
+                        const image =  process.env.REACT_APP_IMAGE_URL + "gallery/" + ht.image;
                         return (
                             <SwiperSlide key={i}>
-                                <img src={require(`src/assets/images/${ht}`)} alt="img" className="w-100"/>
+                                <img src={image} alt="img" className="w-100"/>
                             </SwiperSlide>
                         );
                     })

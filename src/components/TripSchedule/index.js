@@ -11,7 +11,7 @@ function TripSchedule(props) {
                         schedule.map((part, i) => {
                             return (
                                 <tr key={i}>
-                                    <th>{part.time}</th>
+                                    <th>{part.startTime.slice(0,5)}</th>
                                     <td>{part.content}</td>
                                 </tr>
                             );

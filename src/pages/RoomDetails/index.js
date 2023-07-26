@@ -47,28 +47,19 @@ const itemInfors = [
 ];
 
 function RoomDetails(props) {
-    let {handleData, roomDetails} = props;
+    let {handleData, roomDetails, rooms} = props;
     let {id} = useParams();
     const [selectedRoom, setSelectedRoom] = useState();
-    const [specifics, setSpecifics] = useState();
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
   
     useEffect(()=>{
         const fetchApi = async() =>{
-            const res = await roomServices.getRoomDetails();
-            handleData("roomDetails",res.data);
-            setSelectedRoom(res.data.find(item => item.id===id));
-            setSpecifics([...Object.values(res.data.find(item => item.id===id).specifications)]);
+            const res = await roomServices.getRoomDetails(id);
+            setSelectedRoom(res);
         }
-        if(roomDetails.length===0){
-            fetchApi();
-        }
-        else{
-            setSelectedRoom(roomDetails.find(item => item.id===id));
-            setSpecifics([...Object.values(roomDetails.find(item => item.id===id).specifications)]);
-        }
+        fetchApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-     }, [])
+     }, [id])
 
    
     return (
@@ -89,10 +80,11 @@ function RoomDetails(props) {
                                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                                 modules={[FreeMode, Navigation, Thumbs]}
                                 className="mySwiper2 slide-show">
-                                {selectedRoom&&selectedRoom.listImg.map((image, i) => {
+                                {selectedRoom&&selectedRoom.images.map((image, i) => {
+                                    const imgSrc =  process.env.REACT_APP_IMAGE_URL + "accommodation_2/" + image;
                                     return (
                                         <SwiperSlide key={i}>
-                                            <img src={require(`src/assets/images/${image}`)} alt="img" />
+                                            <img src={imgSrc} alt="img" />
                                         </SwiperSlide>
                                     );
                                 })}
@@ -106,10 +98,11 @@ function RoomDetails(props) {
                                     watchSlidesProgress={true}
                                     modules={[FreeMode, Navigation, Thumbs]}
                                     className="mySwiper list-slides">
-                                    {selectedRoom&&selectedRoom.listImg.map((image, i) => {
+                                    {selectedRoom&&selectedRoom.images.map((image, i) => {
+                                        const imgSrc =  process.env.REACT_APP_IMAGE_URL + "accommodation_2/" + image;
                                         return (
                                             <SwiperSlide key={i}>
-                                                <img src={require(`src/assets/images/${image}`)} alt="" />
+                                                <img src={imgSrc} alt="" />
                                             </SwiperSlide>
                                         );
                                     })}
@@ -117,8 +110,14 @@ function RoomDetails(props) {
                             </div>
                         </div>
                         <div className="box-pic-desc d-flex">
-                            {specifics&&itemInfors.map((item, i) => {
-                                var title = item.title + ": "+specifics[i];
+                            {selectedRoom&&itemInfors.map((item, i) => {
+                                var param = "";
+                                if(i == 0) param = selectedRoom.area;
+                                else if(i == 1) param = selectedRoom.hight;
+                                else if(i == 2) param = selectedRoom.bedSize;
+                                else if(i == 3) param = selectedRoom.roomRate;
+                                param = param == null? "0":param;
+                                var title = item.title + ": "+param;
                                 // console.log(title);
                                 return (
                                     <Item key={i} imgSrc={item.icon} mainTitle={title}
@@ -129,7 +128,7 @@ function RoomDetails(props) {
                     </div>
                     <div className="box-desc" style={{ lineHeight: "2rem" }}>
                         <Title name="Decription" fontSize="2rem" />
-                        <p style={{ fontSize: "1.2rem" }}>{selectedRoom&&selectedRoom.desc}</p>
+                        <p style={{ fontSize: "1.2rem" }}>{selectedRoom&&selectedRoom.description}</p>
                     </div>
                     <div className="box-equipments">
                         <span className="title">{selectedRoom&&selectedRoom.name} equipments</span>
@@ -151,10 +150,11 @@ function RoomDetails(props) {
                     <div className="other_rooms">
                         <Title name="OTHER ROOMS" fontSize="2rem" />
                         <div className="list-rooms">
-                            {selectedRoom&&roomDetails&&roomDetails.filter(rooms => rooms.name !== selectedRoom.name).map((room, i) => {
+                            {selectedRoom&&rooms&&rooms.filter(r => r.id !== selectedRoom.id).map((room, i) => {
+                                const imgSrc =  process.env.REACT_APP_IMAGE_URL + "accommodation_2/" + room.images[0];
                                 return (
                                     <Border key={i} color="gold" classname="other-room-item">
-                                        <Item className="al-center " imgSrc={require(`src/assets/images/${room.listImg[0]}`)} mainTitle={room.name}
+                                        <Item className="al-center " imgSrc={imgSrc} mainTitle={room.name}
                                             textPos="right" fontSize="1.5rem" textTransform="uppercase" fontFamily='Font-Title'
                                             width="w-100" imgWidth="w-50" imgHeight="10rem" contentWidth="w-40" link={`/accommodation/${room.id}`} />
                                     </Border>
@@ -169,6 +169,7 @@ function RoomDetails(props) {
 }
 const mapStateToProps = (state) => ({ 
     roomDetails:state.roomDetails,
+    rooms: state.rooms
 });
 const mapDispatchToProps = { handleData }
 export default connect(mapStateToProps, mapDispatchToProps)(RoomDetails);

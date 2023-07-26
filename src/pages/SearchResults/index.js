@@ -17,10 +17,10 @@ function SearchResults(props) {
         setResRooms([]);
         setResTours([]);
         resSearch.results.map((res) => {
-            if (res.parentId === "accommodation") {
+            if (res.category == "accommodation") {
                 setResRooms(oldRes => [...oldRes, res])
             }
-            else if (res.parentId === "tour-travel") {
+            else if (res.category == "tour-travel") {
                 setResTours(oldRes => [...oldRes, res])
             }
             return false;
@@ -37,8 +37,8 @@ function SearchResults(props) {
                 {resRooms.length !== 0 && <div className='res-rooms'>
                     {
                         resRooms.map((item, i) => {
-                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={require(`src/assets/images/${item.imgSrc}`)} fontSize="1.5rem"
-                                color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50" subTitle={item.subTitle}
+                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={item.image} fontSize="1.5rem"
+                                color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50"
                                 textTransform="capitalize" textPos="right" link={`/accommodation/${item.id}`} />);
                         })
                     }
@@ -47,8 +47,8 @@ function SearchResults(props) {
                 {resTours.length !== 0 && <div className='res-tours'>
                     {
                         resTours.map((item, i) => {
-                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={require(`src/assets/images/${item.imgSrc}`)} fontSize="1.5rem"
-                                color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50" subTitle={item.subTitle}
+                            return (<Item key={i} className="search-item" mainTitle={item.name} imgSrc={item.image} fontSize="1.5rem"
+                                color="#fff" icon="corner" width="w-30" imgWidth="w-50" contentWidth="w-50"
                                 textTransform="capitalize" textPos="right" link={`/tour-travel/${item.id}`} />);
                         })
                     }

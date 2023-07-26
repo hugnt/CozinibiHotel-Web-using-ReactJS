@@ -1,10 +1,9 @@
 //api
 import * as request from '~/utils/request'; 
 
-export const getBanner = async() => {
+export const getInformation = async() => {
     try {
-        var res = await request.get('Page');
-        res = res.filter(e => e.isActive == true);
+        var res = await request.get('Information');
         return res;
     } catch (error) {
         console.log(error);

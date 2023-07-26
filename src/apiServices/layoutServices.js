@@ -3,7 +3,8 @@ import * as request from '~/utils/request';
 
 export const getMenuItem = async() => {
     try {
-        const res = await request.get('menuItem');
+        var res = await request.get('Page');
+        res = res.filter(e => e.isActive == true && e.isMenuActive == true);
         return res;
     } catch (error) {
         console.log(error);

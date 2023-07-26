@@ -29,9 +29,7 @@ function Comment(props) {
                         <FontAwesomeIcon icon="fa-solid fa-quote-left" className='icon-fa' />
                     </legend>
                     <div className="para">
-                        <p>
-                           {comment?comment:sample.cmt}
-                        </p>
+                        <div dangerouslySetInnerHTML={{ __html: comment ? comment : sample.cmt }} />
                         <br />
                         <br />
                         <hr

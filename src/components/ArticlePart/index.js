@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 //css
 import './ArticlePart.css'
-const sampleParam = ` Thing lesser replenish evening called void a sea blessed meat fourth
+var sampleParam = `<p> Thing lesser replenish evening called void a sea blessed meat fourth
                     called moveth place behold night own night third in they’re abundant
                     and don’t you’re the upon fruit. Divided open divided appear also
                     saw may fill. whales seed creepeth. Open lessegether he also morning
                     land i saw don’t you’re the upon fruit. Divided open divided appear also
                     saw may fill. whales seed creepeth. Open lessegether he also morning
-                    land i saw.`
+                    land i saw. </p>`
 
 function ArticlePart(props) {
     var {title, param, subTitle,subTitleBottom, textAlign, color, width, ending,
@@ -35,6 +35,15 @@ function ArticlePart(props) {
     if(limitLine){
         paramStyle = {...paramStyle,...limitWorld}
     }
+    if(param){
+        console.log(param)
+        param = param.slice(0, 2) + ` style="color:${paramColor};text-align:${textAlignParam}"` + param.slice(2);
+    }
+    else{
+        sampleParam = sampleParam.slice(0, 2) + ` style="color:${paramColor};text-align:${textAlignParam}"` + sampleParam.slice(2);
+
+    }
+   
     return ( 
         <div className={"article "+ width+" "+classname}>
             <div className="title" style={textStyle}>
@@ -46,11 +55,7 @@ function ArticlePart(props) {
                     subTitleBottom&&<div className="sub-title" style={textStyle}>{subTitleBottom}</div>
                 }
             </div>
-            <div className={"param"}>
-                <p style={paramStyle}>
-                    {param?param:sampleParam}
-                </p>
-            </div>
+            <div className={"param"} dangerouslySetInnerHTML={{ __html: param?param:sampleParam }} />
             <div className="read-more" style={textStyle}>
                 <Link to={link} style={paramStyle}>
                     {ending}

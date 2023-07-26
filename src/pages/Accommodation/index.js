@@ -41,18 +41,19 @@ function Accommodation(props) {
                         modules={[FreeMode, Navigation, Thumbs]}
                         className="mySwiper2">
                         {rooms.map((room, i) => {
+                            const image =  process.env.REACT_APP_IMAGE_URL + "accommodation_2/" + room.images[0];
                             return (
                                 <SwiperSlide key={i}>
                                     <div className="current-slide d-flex">
                                         <Link to={`/accommodation/${room.id}`} className="current-img w-60">
                                             <img
-                                                src={require(`src/assets/images/${room.imgSrc}`)}
+                                                src={image}
                                                 alt=""
                                             />
                                         </Link>
                                         <ArticlePart classname="acc-article" width="w-40"
-                                         title={room.name} param={room.param} color="#" 
-                                         subTitleBottom={room.type} link={`/accommodation/${room.id}`} ending="Read more"/>
+                                         title={room.name} param={room.description} color="#" 
+                                         link={`/accommodation/${room.id}`} ending="Read more"/>
                                     </div>
                                 </SwiperSlide>);
                          })}
@@ -92,9 +93,10 @@ function Accommodation(props) {
                                 >
 
                                 {rooms.map((room, i) => {
+                                    const image =  process.env.REACT_APP_IMAGE_URL + "accommodation_2/" + room.images[0];
                                     return (
                                         <SwiperSlide key={i}>
-                                            <Item className="al-center acc-item" imgSrc={require(`src/assets/images/${room.imgSrc}`)} mainTitle={room.name} subTitle={room.type}
+                                            <Item className="al-center acc-item" imgSrc={image} mainTitle={room.name}
                                                 textPos="right" fontSize="1.5rem" textTransform="uppercase" fontFamily='Font-Title'
                                                 width="w-100" imgWidth="w-60" imgHeight="8rem" contentWidth="w-40" />
                                         </SwiperSlide>

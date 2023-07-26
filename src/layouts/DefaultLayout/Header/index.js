@@ -32,12 +32,12 @@ function Header(props) {
     useEffect(()=>{
        const fetchApi = async() =>{
             const res = await languageServices.getLanguage();
-            handleData("languages",res.data);
+            handleData("languages",res);
             
-            setCurrLang(res.data[0]);
+            setCurrLang(res[0]);
 
             const res2 = await layoutServices.getMenuItem();
-            handleData("menuItem",res2.data);
+            handleData("menuItem",res2);
        }
        fetchApi(); 
        // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -119,15 +119,15 @@ function Header(props) {
                             {
                                 menuItem&&menuItem.map((item, i) => {
                                     var activeClass = "";
-                                    var id = item.path.slice(1);
+                                    var name = item.url.slice(1);
 
-                                    if (id === activeMenu) {
-                                        // console.log("match",id);
+                                    if (name === activeMenu) {
+                                        console.log("match: ",name);
                                         activeClass = "load_menuItem";
                                     }
                                     return (
                                         <div key={i} className={"menu-item " + activeClass} >
-                                            <Link className="item" to={item.path} onClick={() => handleActiveMenu(id)}>{item.name}</Link>
+                                            <Link className="item" to={item.url} onClick={() => handleActiveMenu(name)}>{item.name}</Link>
                                         </div>
                                     );
                                 })

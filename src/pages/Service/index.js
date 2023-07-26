@@ -63,13 +63,14 @@ function Service(props) {
                 }}>
                 {services.map((service, i) => {
                     var activeClass = "";
+                    const icon =  process.env.REACT_APP_IMAGE_URL + "service/" + service.icon;
                     if(active===i){
                         activeClass = "sv-active";
                     }
                     return (
                         <SwiperSlide key={i} onClick={()=>handleActiveItem(i)}> 
                             <Border color="black" classname="w-100 sv-wrapper-item">
-                                <Item className={`sv-item ${activeClass}`} mainTitle={service.name} imgSrc={require(`src/assets/images/${service.imgSrc}`)} imgHeight="5rem"
+                                <Item className={`sv-item ${activeClass}`} mainTitle={service.name} imgSrc={icon} imgHeight="5rem"
                                     color="#000" textPos="inBottom" textTransform="uppercase" fontSize='1.5rem' fontFamily='Font-Title' />
                             </Border>
                         </SwiperSlide>
@@ -88,10 +89,11 @@ function Service(props) {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper2">
                 {services.map((service, i) => {
+                    const image =  process.env.REACT_APP_IMAGE_URL + "service/" + service.image;
                     return (
                         <SwiperSlide key={i}>
-                            <Border color="black" classname="sv-intro-item" bgNow= {require(`src/assets/images/${service.imgSrc2}`)}> 
-                                <ArticlePart title={service.name} param={service.param}
+                            <Border color="black" classname="sv-intro-item" bgNow= {image}> 
+                                <ArticlePart title={service.name} param={service.description}
                                     color="var(--gold)" width="w-30" classname="bg-trans sv-article-wrapper" 
                                     paramColor="#fff" textAlignParam="left" limitLine="8"/>
                             </Border>

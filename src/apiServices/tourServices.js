@@ -3,26 +3,31 @@ import * as request from '~/utils/request';
 
 export const getTour = async() => {
     try {
-        const res = await request.get('tour_travels');
+        var res = await request.get('TourTravel');
+        res = res.filter(e => e.isActive == true);
         return res;
     } catch (error) {
         console.log(error);
     }
 }
-export const getTourDetails = async() => {
+export const getTourDetails = async(id) => {
     try {
-        const res = await request.get('tourDetails');
-        return res;
+        var res = await request.get(`TourTravel/${id}`);
+        if(res.isActive == true) return res;
+        return null;
     } catch (error) {
         console.log(error);
     }
 }
 
-export const getTripSchedule = async() => {
+export const getToursByName = async(tourName) => {
     try {
-        const res = await request.get('tripSchedule');
+        var res = await request.get(`TourTravel/Name/${tourName}`);
+        res = res.filter(e => e.isActive == true);
         return res;
     } catch (error) {
         console.log(error);
+        return null;
     }
 }
+

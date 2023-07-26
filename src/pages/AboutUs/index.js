@@ -1,12 +1,12 @@
 //hooks
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 //redux
 import { connect } from 'react-redux';
 import { handleData } from '~/utils';
 
 //api
-import * as featureServices from '~/apiServices/featureServices';
+import  * as  articleServices from "~/apiServices/articleServices";
 
 
 //css
@@ -26,35 +26,36 @@ We hope that you will have a memorable and productive stay with us.`
 function AboutUs(props) {
     let {features, handleData} = props;
 
+    const [paramAboutUs, setParamAboutUs] = useState();
+
     useEffect(()=>{
         const fetchApi = async() =>{
-            const res = await featureServices.getFeature();
-            handleData("features",res.data);
+
+            const res4 = await articleServices.getArticleByPage("About-Us");
+            setParamAboutUs(res4);
         }
-        if(features.length===0){
-            fetchApi();
-        }
+        fetchApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [])
 
     return (
         <div className='about_us'>
-            {features.length!==0&&<Fragment>
+            {paramAboutUs&&<Fragment>
                 <SectionPart bgColor="bg-gold">
-                    <ArticlePart title="cozynibi hotel" subTitle="Welcome to" param={welcome} textAlign="center" ending="Thank you!"/>
+                    <ArticlePart title={paramAboutUs[0].title} subTitle={paramAboutUs[0].subTitle} param={paramAboutUs[0].content} textAlign="center" ending="Thank you!"/>
                 </SectionPart>
                 <SectionPart classname={"comfortable-rooms"}>
-                    <ArticlePart title={features[0].name} param={features[0].param} 
+                    <ArticlePart title={paramAboutUs[1].title} param={paramAboutUs[1].content} 
                     color="var(--gold)" width="w-30" classname="bg-trans au-article-wrapper" 
                     paramColor="#fff" textAlignParam="left" ending="Explore now!" link="/accommodation"/>
                 </SectionPart>
                 <SectionPart classname={"extensive-menu"}>
-                    <ArticlePart title={features[1].name} param={features[1].param} 
+                    <ArticlePart title={paramAboutUs[2].title} param={paramAboutUs[2].content} 
                     color="var(--gold)" width="w-30" classname="bg-trans au-article-wrapper"
                      paramColor="#fff" textAlignParam="left" ending="Explore now!" link="/menu"/>
                 </SectionPart>
                 <SectionPart classname={"various-services"}>
-                    <ArticlePart title={features[2].name} param={features[2].param} 
+                    <ArticlePart title={paramAboutUs[3].title} param={paramAboutUs[3].content} 
                     color="var(--gold)" width="w-30" classname="bg-trans au-article-wrapper"
                      paramColor="#fff" textAlignParam="left" ending="Explore now!" link="/service"/>
                     <div className='last-border'></div>

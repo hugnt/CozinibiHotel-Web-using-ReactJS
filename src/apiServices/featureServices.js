@@ -12,7 +12,8 @@ export const getFeature = async() => {
 
 export const getNews = async() => {
     try {
-        const res = await request.get('news');
+        var res = await request.get('News');
+        res = res.filter(e => e.isActive == true);
         return res;
     } catch (error) {
         console.log(error);

@@ -25,7 +25,7 @@ function Menu(props) {
     useEffect(()=>{
         const fetchApi = async() =>{
             const res = await menuServices.getMenu();
-            handleData("foods",res.data);
+            handleData("foods",res);
         
         }
         if(foods.length===0){
@@ -43,18 +43,19 @@ function Menu(props) {
         <SectionPart bgColor="bg-white">
             <div className="foods-list d-flex">
                 {foods.map((food) => {
+                    const image =  process.env.REACT_APP_IMAGE_URL + "menu/" + food.image;
                     return (
                         <Border key={food.id} color="gold" classname="w-30 wrapper-food">
                             <div className='price'><span>Price: ${food.price}</span></div>
                             <Item className="food-item" mainTitle={food.name}
-                                imgSrc={require(`src/assets/images/${food.imgSrc}`)} color="#fff" bgTitle={true}
+                                imgSrc={image} color="#fff" bgTitle={true}
                                 textPos="onBottom" textTransform="capitalize"
                                 fontSize='1.5rem' fontFamily='Font-Title' />
                             <div className='options'>
                                 <span onClick={handleToggleHeart} >{Icon("heart-fill")}</span>
                                 <span onClick={() => handleAddFoods(food)} className="cart-btn">
                                     {Icon("cart")}
-                                    {foodPicked.find(x => x.food.id === food.id) && <span className='number'>{foodPicked.find(x => x.food.id === food.id).number}</span>}
+                                    {foodPicked.find(x => x.food.id == food.id) && <span className='number'>{foodPicked.find(x => x.food.id == food.id).number}</span>}
                                 </span>
                             </div>
                         </Border>

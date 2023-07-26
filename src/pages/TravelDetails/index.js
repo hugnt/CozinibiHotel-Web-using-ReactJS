@@ -23,41 +23,31 @@ import './TravelDetails.css'
 
 
 function TravelDetails(props) {
-    let {tourDetails,tripSchedule,handleData} = props;
+    let {tourDetails,tripSchedule,handleData, tour_travels} = props;
     let { id } = useParams();
     const [selectedTour, setSelectedTour] = useState();
-    const [selectedSchedule, setSelectedSchedule] = useState();
     useEffect(()=>{
         const fetchApi = async() =>{
-            const res = await tourServices.getTourDetails();
-            handleData("tourDetails",res.data);
-            setSelectedTour(res.data.find(item => item.id===id));
-
-            const res2 = await tourServices.getTripSchedule();
-            handleData("tripSchedule",res2.data);
-            setSelectedSchedule(res2.data.find(item => item.id==="tour-01"));
+            const res = await tourServices.getTourDetails(id);
+            setSelectedTour(res);
         }
-        if(tourDetails.length===0||tripSchedule.length===0){
-            fetchApi();
-        }
-        else{
-            setSelectedTour(tourDetails.find(item => item.id===id));
-            setSelectedSchedule(tripSchedule.find(item => item.id==="tour-01"));
-        }
+        fetchApi();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-     }, [])
+     }, [id])
 
     return (
         <Fragment>
             <SectionPart bgColor="bg-gold" classname="tv-title">
-                {selectedTour&&<Title name={selectedTour.title} subTitle={selectedTour.subTitle}
+                {selectedTour&&<Title name={selectedTour.name} subTitle={selectedTour.address}
                     pos="center" fontSize="2rem" />}
             </SectionPart>
             <section className='tv-section-images'>
-                {selectedTour&&selectedTour.listImg.map((img, i) => {
+                {selectedTour&&selectedTour.tourGalleries.map((img, i) => {
+                    if(i >= 3) return;
+                    const imgSrc =  process.env.REACT_APP_IMAGE_URL + "tour_travel_2/" + img;
                     return (
                         <div key={i} className='tv-img-box'>
-                            <img src={require(`src/assets/images/${img}`)} alt='tour-img' className='img-fit' />
+                            <img src={imgSrc} alt='tour-img' className='img-fit' />
                         </div>
                     );
                 })}
@@ -66,12 +56,12 @@ function TravelDetails(props) {
             <SectionPart bgColor="bg-white">
                 <div className="trip_schedule_comp">
                     <Title name="trip chedule" type="haft-underline" />
-                    {selectedSchedule&&<TripSchedule schedule={selectedSchedule.timeline}/>}
+                    {selectedTour&&<TripSchedule schedule={selectedTour.tourSchedules}/>}
                 </div>
                 <div className="travel-desc content-bottom d-flex">
                     <ul className="travel-desc-col">
                         <Title name="inclusions" type="haft-underline" />
-                        {selectedTour&&selectedTour.inclusions.map((item, i) => {
+                        {selectedTour&&selectedTour.tourInclusions.map((item, i) => {
                             return (
                                 <li key={i}>
                                     {Icon("point-right")}
@@ -83,7 +73,7 @@ function TravelDetails(props) {
                     </ul>
                     <ul className="travel-desc-col">
                         <Title name="exclusions" type="haft-underline" />
-                        {selectedTour&&selectedTour.exclusions.map((item, i) => {
+                        {selectedTour&&selectedTour.tourExclusions.map((item, i) => {
                             return (
                                 <li key={i}>
                                     {Icon("point-right")}
@@ -94,11 +84,11 @@ function TravelDetails(props) {
                     </ul>
                     <ul className="travel-desc-col">
                         <Title name="Price" type="haft-underline" />
-                        {selectedTour&&selectedTour.price.map((item, i) => {
+                        {selectedTour&&selectedTour.tourPrices.map((item, i) => {
                             return (
                                 <li key={i}>
                                     {Icon("point-right")}
-                                    <span>{item}</span>
+                                    <span>{item.minPeople} to {item.maxPeople} people: {item.price}$ /person</span>
                                 </li>
                             );
                         })}
@@ -111,10 +101,12 @@ function TravelDetails(props) {
                         <img src={require("~/assets/images/line-right.png")} alt="line" className="line-title"/>
                     </div>
                     <ul className="travel-list-img d-flex" >
-                        {selectedTour&&tourDetails&&tourDetails.filter(tours => tours.id!==selectedTour.id).map((otherTour,i)=>{
+                        {tour_travels&&selectedTour&&tour_travels.filter(tours => tours.id!=selectedTour.id).map((otherTour,i)=>{
+                            const imgSrc =  process.env.REACT_APP_IMAGE_URL + "tour_travel_2/" + otherTour.tourGalleries[0];
+                            if(i >=4) return;
                             return(
-                                <Item key={i} className="otherTour-item" imgSrc={require(`src/assets/images/${otherTour.listImg[0]}`)} mainTitle={otherTour.name} 
-                                subTitle={otherTour.subTitle} textPos="onMidle" color="#fff" fontSize="1.2rem"
+                                <Item key={i} className="otherTour-item" imgSrc={imgSrc} mainTitle={otherTour.name} 
+                                subTitle={otherTour.address} textPos="onMidle" color="#fff" fontSize="1.2rem"
                                  textTransform="uppercase" fontFamily='Font-Title' link={`/tour-travel/${otherTour.id}`}>
                                 </Item>
                             );
